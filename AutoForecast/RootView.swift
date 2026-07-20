@@ -18,17 +18,16 @@ struct RootView: View {
     @AppStorage("welcomeScreenAlreadyShown")
     private var welcomeScreenAlreadyShown = false
 
-    @State private var showSplash = true
+//    @State private var showSplash = true
 
     var body: some View {
         ZStack {
             mainContent
-
-            if showSplash {
-                SplashOverlay {
-                    showSplash = false
-                }
-            }
+//            if showSplash {
+//                SplashOverlay {
+//                    showSplash = false
+//                }
+//            }
         }
     }
 

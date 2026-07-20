@@ -16,7 +16,20 @@ struct AutoForecastApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
-        WindowGroup {
+//        WindowGroup {
+//            RootView()
+//        }
+        LaunchScreen(config: .init(
+            backgroundColor: ColorLayout.primary.auto,
+            logoBackgroundColor: ColorLayout.white.auto
+        )) {
+            Image("AutoForecastWhiteLogoAndText")
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 240)
+                .foregroundColor(ColorLayout.white.auto)
+        } rootContent: {
             RootView()
         }
     }
