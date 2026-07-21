@@ -1,0 +1,1664 @@
+{
+  "sourceLanguage" : "it",
+  "strings" : {
+    "%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
+    },
+    "%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@%2$@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%@ • %lld km" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ • %2$lld km"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ • %2$lld km"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "%lld km" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld km"
+          }
+        }
+      }
+    },
+    "± 500 km" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "± 500 km"
+          }
+        }
+      }
+    },
+    "€%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "€%@"
+          }
+        }
+      }
+    },
+    "€%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "€%lld"
+          }
+        }
+      }
+    },
+    "Abbiamo analizzato i dati a nostra disposizione e abbiamo calcolato un'intervallo di valori tra cui potrebbe trovarsi la tua auto. Ricorda che le cifre potrebbero variare a seconda di fattori esterni quali le condizioni generali del veicolo, i chilometri percorsi e altre caratteristiche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We have analyzed the available data and calculated an estimated price range for your car. Please keep in mind that these figures may vary depending on external factors, such as the vehicle's overall condition, mileage, and other features."
+          }
+        }
+      }
+    },
+    "Aggiungi al tuo garage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add to your garage"
+          }
+        }
+      }
+    },
+    "ALIMENTAZIONE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FUEL TYPE"
+          }
+        }
+      }
+    },
+    "Analizzando i dati in nostro possesso di ogni anno, abbiamo assegnato questo indice per il tuo veicolo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By analyzing our annual data, we’ve calculated this index for your vehicle."
+          }
+        }
+      }
+    },
+    "Analizzo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analyzing"
+          }
+        }
+      }
+    },
+    "Ancora nessuna valutazione è stata effettuata" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No evaluation has been carried out yet."
+          }
+        }
+      }
+    },
+    "Andamento del valore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Value trend"
+          }
+        }
+      }
+    },
+    "Anno" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Year"
+          }
+        }
+      }
+    },
+    "Anno %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Year %@"
+          }
+        }
+      }
+    },
+    "Anno di 1° immatricolazione" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First registration year"
+          }
+        }
+      }
+    },
+    "Anno di 1° immatricolaziuone" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First registration year"
+          }
+        }
+      }
+    },
+    "Anno migliore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Best year"
+          }
+        }
+      }
+    },
+    "Anno: %lld • Km: %lld km" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Year: %1$lld • Km: %2$lld km"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Anno: %1$lld • Km: %2$lld km"
+          }
+        }
+      }
+    },
+    "Annulla" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "Aree di colore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color areas"
+          }
+        }
+      }
+    },
+    "Aspetto" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appearance"
+          }
+        }
+      }
+    },
+    "Automatico" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic"
+          }
+        }
+      }
+    },
+    "Avanti" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        }
+      }
+    },
+    "Basato su modelli di svalutazione e algoritmi di apprendimento automatico" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Driven by depreciation models and machine learning algorithms"
+          }
+        }
+      }
+    },
+    "Baseline" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baseline"
+          }
+        }
+      }
+    },
+    "Brand" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brand"
+          }
+        }
+      }
+    },
+    "Build" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Build"
+          }
+        }
+      }
+    },
+    "CALCOLA" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EVALUATE"
+          }
+        }
+      }
+    },
+    "CATEGORIA AUTO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VEHICLE CATEGORY"
+          }
+        }
+      }
+    },
+    "Chiaro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light"
+          }
+        }
+      }
+    },
+    "CHILOMETRAGGIO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MILEAGE"
+          }
+        }
+      }
+    },
+    "Colore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color"
+          }
+        }
+      }
+    },
+    "COLORE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "COLOR"
+          }
+        }
+      }
+    },
+    "Come funziona la previsione di valutazione dell'auto?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How does vehicle value prediction work?"
+          }
+        }
+      }
+    },
+    "Come l'AI ci aiuta a calcolare i dati?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How does AI help us calculate the data?"
+          }
+        }
+      }
+    },
+    "Come posso inviare un feedback?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How can I submit feedback?"
+          }
+        }
+      }
+    },
+    "Dati" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        }
+      }
+    },
+    "Dati Auto" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Car Details"
+          }
+        }
+      }
+    },
+    "Dati ottimistici" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Best-case scenario"
+          }
+        }
+      }
+    },
+    "Dati pessimistici" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Worst-case scenario"
+          }
+        }
+      }
+    },
+    "Elaboro dati" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Processing data"
+          }
+        }
+      }
+    },
+    "English" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "English"
+          }
+        }
+      }
+    },
+    "Esplora la valutazione del tuo veicolo anno per anno tramite una tabella semplice e immediata, pensata per rendere la lettura dei dati più chiara." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explore your vehicle's year-by-year valuation through a simple, intuitive table designed to make the data clearer and easier to read."
+          }
+        }
+      }
+    },
+    "FAQ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ"
+          }
+        }
+      }
+    },
+    "FAQ / Centro assistenza" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ / Help Center"
+          }
+        }
+      }
+    },
+    "Fatto" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "Garage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garage"
+          }
+        }
+      }
+    },
+    "GARAGE AGGIORNATO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GARAGE UPDATED"
+          }
+        }
+      }
+    },
+    "Generale" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        }
+      }
+    },
+    "Guarda un esempio →" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View example →"
+          }
+        }
+      }
+    },
+    "Hai già una ricerca con questi parametri. Vuoi sovrascriverla?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You already have a search with these parameters. Do you want to overwrite it?"
+          }
+        }
+      }
+    },
+    "Hello, world!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hello, world!"
+          }
+        }
+      }
+    },
+    "Home" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        }
+      }
+    },
+    "Identifica la tua auto" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identify your car"
+          }
+        }
+      }
+    },
+    "Il chilometraggio viene normalizzato rispetto alla percorrenza media annua e applicato come fattore correttivo sulla curva di valore residuo." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mileage is normalized relative to average annual mileage and applied as an adjustment factor on the residual value curve."
+          }
+        }
+      }
+    },
+    "Il colore è ponderato in base alla liquidità di mercato e alla domanda storica per modello e segmento." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exterior color is adjusted for market liquidity and historical demand by model and segment."
+          }
+        }
+      }
+    },
+    "Il numero di intestazioni precedenti viene considerato come indicatore di continuità e incide negativamente sul valore residuo all’aumentare dei passaggi di proprietà." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The number of previous owners is used as a continuity indicator, and additional ownership transfers negatively impact the residual value."
+          }
+        }
+      }
+    },
+    "Il tuo garage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your garage"
+          }
+        }
+      }
+    },
+    "Impostazioni" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "Incremento di valore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Value Gain"
+          }
+        }
+      }
+    },
+    "Informazioni sull'applicazione" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About the app"
+          }
+        }
+      }
+    },
+    "Informazioni veicolo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vehicle information"
+          }
+        }
+      }
+    },
+    "Inizia" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
+    },
+    "Inserisci l'oggetto" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter subject"
+          }
+        }
+      }
+    },
+    "Invia feedback" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send feedback"
+          }
+        }
+      }
+    },
+    "Italiano" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Italiano"
+          }
+        }
+      }
+    },
+    "Km attuali" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current mileage"
+          }
+        }
+      }
+    },
+    "Km Attuali" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current mileage"
+          }
+        }
+      }
+    },
+    "L'app è gratuita?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Is the app free?"
+          }
+        }
+      }
+    },
+    "La presenza di optional rilevanti contribuisce alla tenuta del valore." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relevant optional help preserve the vehicle’s value."
+          }
+        }
+      }
+    },
+    "La presenza di storico manutentivo verificabile riduce il coefficiente di svalutazione e migliora l’affidabilità della stima." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verified service history reduces depreciation and increases estimate reliability."
+          }
+        }
+      }
+    },
+    "La stima tiene conto delle dinamiche territoriali di domanda e offerta, con correzioni legate al mercato locale." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimates reflect local supply and demand, adjusted for regional market trends."
+          }
+        }
+      }
+    },
+    "La tipologia di alimentazione influisce sulla previsione." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fuel type affects the valuation forecast."
+          }
+        }
+      }
+    },
+    "La tua auto mantiene bene il suo valore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your car holds its value well"
+          }
+        }
+      }
+    },
+    "La tua auto potrebbe aumentare di valore nel tempo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your car could gain value over time"
+          }
+        }
+      }
+    },
+    "La tua auto si svaluta lentamente" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your car depreciates slowly"
+          }
+        }
+      }
+    },
+    "La tua auto si svaluta rapidamente" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your car depreciates rapidly"
+          }
+        }
+      }
+    },
+    "La tua stima nel %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your estimate in %@"
+          }
+        }
+      }
+    },
+    "La valutazione si basa su modello, anno, chilometraggio e stato dell'auto. L'algoritmo stima il valore di mercato attuale e futuro." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Based on model, year, mileage, and condition, the algorithm estimates current and future market value."
+          }
+        }
+      }
+    },
+    "Language Notice" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language Notice"
+          }
+        }
+      }
+    },
+    "LET'S GO!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LET’S GO!"
+          }
+        }
+      }
+    },
+    "Lingua" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        }
+      }
+    },
+    "Mantiene il valore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Holds its value"
+          }
+        }
+      }
+    },
+    "Manutenzione" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maintenance"
+          }
+        }
+      }
+    },
+    "MANUTENZIONE CERTIFICATA" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CERTIFIED SERVICE HISTORY"
+          }
+        }
+      }
+    },
+    "Messaggio" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message"
+          }
+        }
+      }
+    },
+    "Modelli AI e ML addestrati su grandi serie storiche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI models trained on large historical datasets."
+          }
+        }
+      }
+    },
+    "MODELLI PREDITTIVI AVANZATI" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ADVANCED PREDICTIVE MIODELS"
+          }
+        }
+      }
+    },
+    "Modello" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model"
+          }
+        }
+      }
+    },
+    "Mostra meno" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show less"
+          }
+        }
+      }
+    },
+    "Motore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Engine"
+          }
+        }
+      }
+    },
+    "Nessun account email configurato" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No email account configured"
+          }
+        }
+      }
+    },
+    "Nessuna selezione" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None selected"
+          }
+        }
+      }
+    },
+    "Non trovi il %@ che stavi cercando? Scrivici →" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can't find the %@ you were looking for? Contact us →"
+          }
+        }
+      }
+    },
+    "Non trovi la %@ che stavi cercando? Scrivici →" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can't find the %@ you were looking for? Contact us →"
+          }
+        }
+      }
+    },
+    "Numero di proprietari" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous owners"
+          }
+        }
+      }
+    },
+    "NUMERO DI PROPRIETARI" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PREVIOUS OWNERS"
+          }
+        }
+      }
+    },
+    "Numero proprietari" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous owners"
+          }
+        }
+      }
+    },
+    "Oggetto" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subject"
+          }
+        }
+      }
+    },
+    "Ogni categoria è associata a curve di svalutazione dedicate." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each category has dedicated depreciation curves."
+          }
+        }
+      }
+    },
+    "OK" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "OPTIONAL E DOTAZIONI" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FEATURES & EQUIPMENT"
+          }
+        }
+      }
+    },
+    "Optionals" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optionals"
+          }
+        }
+      }
+    },
+    "Opzioni di visualizzazione" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View options"
+          }
+        }
+      }
+    },
+    "Oscillazione del valore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Value fluctuation"
+          }
+        }
+      }
+    },
+    "Parametri opzionali" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional parameters"
+          }
+        }
+      }
+    },
+    "Pop-up informativo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Info pop-up"
+          }
+        }
+      }
+    },
+    "Posso salvare più auto?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can I save multiple cars?"
+          }
+        }
+      }
+    },
+    "Previsione" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prediction"
+          }
+        }
+      }
+    },
+    "PREVISIONE DEL VALORE FUTURO DELL'AUTO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FUTURE CAR VALUE FORECAST"
+          }
+        }
+      }
+    },
+    "Prezzo di listino" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List price"
+          }
+        }
+      }
+    },
+    "Prezzo di listino: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List price: %@"
+          }
+        }
+      }
+    },
+    "PROSEGUI" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CONTINUE"
+          }
+        }
+      }
+    },
+    "Quando conviene vendere" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Best time to sell"
+          }
+        }
+      }
+    },
+    "Quanto varrà la tua auto?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How much will your car be worth?"
+          }
+        }
+      }
+    },
+    "Recupero informazioni" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetching data"
+          }
+        }
+      }
+    },
+    "Report" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report"
+          }
+        }
+      }
+    },
+    "Ricerca già salvata" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search already saved"
+          }
+        }
+      }
+    },
+    "Riepilogo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summary"
+          }
+        }
+      }
+    },
+    "Salvata il %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved on %@"
+          }
+        }
+      }
+    },
+    "Scarica report" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download report"
+          }
+        }
+      }
+    },
+    "Scopri come l'AI ci aiuta a calcolare i dati per aiutarti a prendere sempre la migliore decisione " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See how AI analyzes the data to ensure you always make the best decision."
+          }
+        }
+      }
+    },
+    "Scopri di più" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Learn more"
+          }
+        }
+      }
+    },
+    "Scorri gli anni per conoscerne la valutazione" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swipe through the years to check its value"
+          }
+        }
+      }
+    },
+    "Scuro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark"
+          }
+        }
+      }
+    },
+    "Seleziona il brand" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select brand"
+          }
+        }
+      }
+    },
+    "Seleziona il modello" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select model"
+          }
+        }
+      }
+    },
+    "Seleziona il motore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select engine"
+          }
+        }
+      }
+    },
+    "Seleziona l'anno" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select year"
+          }
+        }
+      }
+    },
+    "selezionati" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "selected"
+          }
+        }
+      }
+    },
+    "selezionato" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "selected"
+          }
+        }
+      }
+    },
+    "Selezione Colore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose Color"
+          }
+        }
+      }
+    },
+    "Serie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Series"
+          }
+        }
+      }
+    },
+    "Serie1" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Series1"
+          }
+        }
+      }
+    },
+    "Serie2" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Series2"
+          }
+        }
+      }
+    },
+    "Serie3" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Series3"
+          }
+        }
+      }
+    },
+    "Sì, l'app è completamente gratuita. Alcune funzionalità avanzate potrebbero richiedere un account premium in futuro." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes, the app is 100% free. Certain advanced features might require a premium account down the road."
+          }
+        }
+      }
+    },
+    "Sì, puoi salvare al massimo 5 auto. Le trovi nella sezione 'Garage' della Home." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes, you can save up to 5 cars. Find them under ‘Garage’ on the Home tab."
+          }
+        }
+      }
+    },
+    "Sovrascrivi" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overwrite"
+          }
+        }
+      }
+    },
+    "START" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "START"
+          }
+        }
+      }
+    },
+    "Stima il valore nel tempo e gestisci le tue valutazioni in modo strutturato" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track value over time and organize your valuations efficiently."
+          }
+        }
+      }
+    },
+    "Supporto" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support"
+          }
+        }
+      }
+    },
+    "Svalutazione lenta" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low depreciation"
+          }
+        }
+      }
+    },
+    "Svalutazione veloce" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High depreciation"
+          }
+        }
+      }
+    },
+    "Tema" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Theme"
+          }
+        }
+      }
+    },
+    "The English translation is currently work in progress and may contain minor errors. We are actively working to improve it." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The English translation is currently work in progress and may contain minor errors. We are actively working to improve it."
+          }
+        }
+      }
+    },
+    "Usa lo slider per spostarti rapidamente e i pulsanti per i piccoli aggiustamenti." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use the slider for quick navigation and the buttons for fine adjustments."
+          }
+        }
+      }
+    },
+    "Vai nella sezione Impostazioni → Supporto → Invia feedback. Puoi inviare suggerimenti o segnalare problemi." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to Settings → Support → Send feedback. You can send suggestions or report issues."
+          }
+        }
+      }
+    },
+    "Valore" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Value"
+          }
+        }
+      }
+    },
+    "Valore del veicolo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vehicle value"
+          }
+        }
+      }
+    },
+    "Valore futuro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Future value"
+          }
+        }
+      }
+    },
+    "Valore massimo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum value"
+          }
+        }
+      }
+    },
+    "Valore minimo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minimum value"
+          }
+        }
+      }
+    },
+    "Valore nel tempo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Value over time"
+          }
+        }
+      }
+    },
+    "Valore stimato" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimated value"
+          }
+        }
+      }
+    },
+    "Valore stimato anno per anno" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimated value by year"
+          }
+        }
+      }
+    },
+    "Versione" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        }
+      }
+    },
+    "Visualizza i dati" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View data"
+          }
+        }
+      }
+    },
+    "Zona" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Region"
+          }
+        }
+      }
+    },
+    "ZONA DI VENDITA" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SALES AREA"
+          }
+        }
+      }
+    },
+    "Zona geografica" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Region"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.2"
+}

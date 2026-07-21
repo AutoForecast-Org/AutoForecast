@@ -49,7 +49,9 @@ struct ForecastView: View {
     }
 
     private var vehicleListPrice: String {
-        "Prezzo di listino: \(Int(userCarForecast.purchasePrice.rounded())) €"
+        let price = userCarForecast.purchasePrice
+            .formatted(.currency(code: "EUR"))
+        return String(localized: "Prezzo di listino: \(price)")
     }
 
     private var versionAndEngine: String {
@@ -61,7 +63,7 @@ struct ForecastView: View {
     }
 
     private var yearAndKms: String {
-        "Anno: \(userCarForecast.userCar.registrationYear) • Km: \(userCarForecast.userCar.actualKm) km"
+        String(localized: "Anno: \(userCarForecast.userCar.registrationYear) • Km: \(userCarForecast.userCar.actualKm) km")
     }
 
     private var yearRange: ClosedRange<Double> {

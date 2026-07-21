@@ -14,13 +14,7 @@ import SwiftUI
 struct SettingsView: View {
 
     @AppStorage("appTheme") private var appTheme: ThemeOption = .system
-
-    /// SET CURRENT PHONE LANGUAGE
-    ///    @AppStorage("appLanguage") private var appLanguage: String = Locale.current.language.languageCode?.identifier ?? "it"
-
-    /// FORCE ITALIAN
-    @AppStorage("appLanguage")
-    private var appLanguage: String = "it"
+    @AppStorage("appLanguage") private var appLanguage: String = "it"
     
     @State private var showEnglishComingSoon = false
     
@@ -54,7 +48,6 @@ struct SettingsView: View {
                     .onChange(of: appLanguage) { oldValue, newValue in
                         if newValue == "en" {
                             showEnglishComingSoon = true
-                            appLanguage = "it" // rollback immediato
                         }
                     }
                 }
@@ -94,10 +87,10 @@ struct SettingsView: View {
         }
         .background(ColorLayout.appBackround.auto)
         .preferredColorScheme(appTheme.colorScheme)
-        .alert("Lingua non ancora disponibile", isPresented: $showEnglishComingSoon) {
+        .alert("Language Notice", isPresented: $showEnglishComingSoon) {
             Button("OK", role: .cancel) {}
         } message: {
-            Text("La versione inglese dell’app sarà disponibile a breve.")
+            Text("The English translation is currently work in progress and may contain minor errors. We are actively working to improve it.")
         }
     }
 }

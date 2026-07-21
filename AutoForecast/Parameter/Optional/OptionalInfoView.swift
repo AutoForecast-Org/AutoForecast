@@ -52,7 +52,7 @@ struct OptionalInfoView: View {
                             Text("Versione")
                                 .foregroundColor(ColorLayout.primary.auto)
                             Spacer()
-                            Text(selectedVersion ?? "Nessuna selezione")
+                            Text(selectedVersion ?? String(localized: "Nessuna selezione"))
                                 .foregroundColor(.secondary)
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.gray)
@@ -92,7 +92,7 @@ struct OptionalInfoView: View {
                             Text("Colore")
                                 .foregroundColor(ColorLayout.primary.auto)
                             Spacer()
-                            Text(selectedColor ?? "Nessuna selezione")
+                            Text(selectedColor ?? String(localized: "Nessuna selezione"))
                                 .foregroundColor(.secondary)
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.gray)
@@ -132,7 +132,7 @@ struct OptionalInfoView: View {
                             Text("Zona geografica")
                                 .foregroundColor(ColorLayout.primary.auto)
                             Spacer()
-                            Text(selectedZone ?? "Nessuna selezione")
+                            Text(selectedZone ?? String(localized: "Nessuna selezione"))
                                 .foregroundColor(.secondary)
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.gray)
@@ -172,7 +172,7 @@ struct OptionalInfoView: View {
                             Text("Manutenzione")
                                 .foregroundColor(ColorLayout.primary.auto)
                             Spacer()
-                            Text(selectedMaintenance ?? "Nessuna selezione")
+                            Text(selectedMaintenance ?? String(localized: "Nessuna selezione"))
                                 .foregroundColor(.secondary)
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.gray)
@@ -214,8 +214,8 @@ struct OptionalInfoView: View {
                             Spacer()
                             
                             Text(selectedOptionals.isEmpty
-                                 ? "Nessuna selezione"
-                                 : "\(selectedOptionals.count) " + (selectedOptionals.count == 1 ? "selezionato" : "selezionati"))
+                                 ? String(localized: "Nessuna selezione")
+                                 : "\(selectedOptionals.count) " + (selectedOptionals.count == 1 ? String(localized: "selezionato") : String(localized: "selezionati")))
                             .foregroundColor(.secondary)
                             
                             Image(systemName: "chevron.right")

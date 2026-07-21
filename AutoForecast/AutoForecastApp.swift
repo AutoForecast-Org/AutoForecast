@@ -14,6 +14,7 @@ import SwiftUI
 @main
 struct AutoForecastApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @AppStorage("appLanguage") private var appLanguage: String = "it"
     
     var body: some Scene {
 //        WindowGroup {
@@ -31,6 +32,7 @@ struct AutoForecastApp: App {
                 .foregroundColor(ColorLayout.white.auto)
         } rootContent: {
             RootView()
+                .environment(\.locale, .init(identifier: appLanguage))
         }
     }
     

@@ -13,8 +13,8 @@ import SwiftUI
 
 struct ForecastInfoCard: Identifiable, Equatable {
     let id = UUID()
-    let title: String
-    let description: String
+    let title: LocalizedStringResource
+    let description: LocalizedStringResource
     let icon: String
 }
 
@@ -94,7 +94,7 @@ struct InfoCardPopupView: View {
                         .font(.title2)
                         .foregroundColor(ColorLayout.primary.auto)
                     
-                    Text(card.title.uppercased())
+                    Text("\(card.title)".uppercased())
                         .font(.headline)
                 }
                 

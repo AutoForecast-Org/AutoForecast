@@ -16,8 +16,8 @@ struct FAQView: View {
     // MARK: - Domande e risposte
     struct FAQItem: Identifiable {
         let id = UUID()
-        let question: String
-        let answer: String
+        let question: LocalizedStringResource
+        let answer: LocalizedStringResource
     }
     
     let faqItems: [FAQItem] = [
@@ -27,7 +27,7 @@ struct FAQView: View {
         ),
         FAQItem(
             question: "Posso salvare più auto?",
-            answer: "Sì, puoi salvare al massimo 5 auto. Le trovi nella sezione 'Preferiti' della Home."
+            answer: "Sì, puoi salvare al massimo 5 auto. Le trovi nella sezione 'Garage' della Home."
         ),
         FAQItem(
             question: "Come posso inviare un feedback?",

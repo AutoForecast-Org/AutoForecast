@@ -18,7 +18,7 @@ public enum DepreciationTrend {
     case slowDepreciation
     case fastDepreciation
 
-    var title: String {
+    var title: LocalizedStringResource {
         switch self {
         case .growing:
             return "Incremento di valore"
@@ -31,7 +31,7 @@ public enum DepreciationTrend {
         }
     }
 
-    var description: String {
+    var description: LocalizedStringResource {
         switch self {
         case .growing:
             return "La tua auto potrebbe aumentare di valore nel tempo"
