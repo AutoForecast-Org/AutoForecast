@@ -245,6 +245,9 @@
         }
       }
     },
+    "Apri confronto" : {
+
+    },
     "Aree di colore" : {
       "localizations" : {
         "en" : {
@@ -290,6 +293,9 @@
           }
         }
       }
+    },
+    "Badge rapidi: Piu conveniente e Piu stabile" : {
+
     },
     "Basato su modelli di svalutazione e algoritmi di apprendimento automatico" : {
       "localizations" : {
@@ -425,6 +431,12 @@
 
     },
     "Confrontiamo la tua auto con modelli simili per alimentazione, segmento e fascia di prezzo." : {
+
+    },
+    "Confronto auto" : {
+
+    },
+    "Confronto del valore stimato anno per anno" : {
 
     },
     "Curva svalutazione" : {
@@ -926,6 +938,9 @@
         }
       }
     },
+    "Match per alimentazione, segmento e fascia prezzo" : {
+
+    },
     "Messaggio" : {
       "localizations" : {
         "en" : {
@@ -1307,6 +1322,9 @@
           }
         }
       }
+    },
+    "Scopri come si posiziona la tua auto rispetto ai modelli piu simili selezionati dall'app." : {
+
     },
     "Scopri di più" : {
       "localizations" : {

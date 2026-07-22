@@ -112,6 +112,8 @@ struct ForecastView: View {
 //                oscillationSection
                 bestSellingSection
 //                depreciationIndicatorSection
+                explanationSection
+                comparisonSection
                 actionsSection
             }
             .background(ColorLayout.appBackround.auto)
@@ -172,7 +174,7 @@ struct ForecastView: View {
 //            Text(vehicleListPrice)
 //                .font(.subheadline)
 //                .foregroundColor(.secondary)
-//            
+//
 //            Text(yearAndKms)
 //                .font(.subheadline)
 //                .foregroundColor(.secondary)
@@ -423,21 +425,6 @@ struct ForecastView: View {
                                 }
                             }
                         }
-                        
-                        Text("Come l'AI ci aiuta a calcolare i dati?")
-                            .font(.title2)
-                        
-                        Text("Scopri come l'AI ci aiuta a calcolare i dati per aiutarti a prendere sempre la migliore decisione ")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-
-                        aiExplanationSection
-                            .popover(item: $selectedInfoCard) { card in
-                                InfoCardPopupView(card: card)
-                                    .presentationCompactAdaptation(.sheet)
-                            }
-                        
-                        
 
 //                        NavigationLink(destination: ForecastHowCalculateDataInfoView()) {
 //                            HStack(spacing: 6) {
@@ -467,31 +454,87 @@ struct ForecastView: View {
 //    private var depreciationIndicatorSection: some View {
 //        VStack(alignment: .leading, spacing: 12) {
 //            SectionTitle("Andamento del valore", systemImage: "chart.line.downtrend.xyaxis")
-//            
+//
 //            if let trend = depreciationTrend {
 //                SectionCard {
 //                    HStack(spacing: 16) {
 //                        Image(systemName: trend.systemImage)
 //                            .font(.title2)
 //                            .foregroundColor(trend.color)
-//                        
+//
 //                        VStack(alignment: .leading, spacing: 4) {
 //                            Text(trend.title)
 //                                .font(.headline)
 //                                .foregroundColor(trend.color)
-//                            
+//
 //                            Text(trend.description)
 //                                .font(.caption)
 //                                .foregroundColor(.secondary)
 //                        }
-//                        
+//
 //                        Spacer()
 //                    }
 //                }
 //            }
 //        }
 //    }
+    
+    // MARK: - COMPARISON SECTION
+    private var comparisonSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            SectionCard {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Come l'AI ci aiuta a calcolare i dati?")
+                        .font(.title2)
+                    
+                    Text("Scopri come l'AI ci aiuta a calcolare i dati per aiutarti a prendere sempre la migliore decisione ")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    aiExplanationSection
+                        .popover(item: $selectedInfoCard) { card in
+                            InfoCardPopupView(card: card)
+                                .presentationCompactAdaptation(.sheet)
+                        }
+                }
+            }
+        }
+    }
+    
+    
+    // MARK: - EXPLANATION SECTION
+    private var explanationSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            SectionCard {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Confronto auto")
+                        .font(.title2)
+                        .fontWeight(.bold)
 
+                    Text("Scopri come si posiziona la tua auto rispetto ai modelli piu simili selezionati dall'app.")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+
+                    VStack(alignment: .leading, spacing: 10) {
+                        Label("Match per alimentazione, segmento e fascia prezzo", systemImage: "line.3.horizontal.decrease.circle")
+                        Label("Confronto del valore stimato anno per anno", systemImage: "chart.line.uptrend.xyaxis")
+                        Label("Badge rapidi: Piu conveniente e Piu stabile", systemImage: "sparkles")
+                    }
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+
+                    NavigationLink {
+                        VehicleComparisonView(referenceForecast: userCarForecast)
+                    } label: {
+                        Label("Apri confronto", systemImage: "arrow.left.arrow.right")
+                    }
+                    .buttonStyle(PrimaryButtonStyle())
+                    .padding(.horizontal, 16)
+                }
+            }
+        }
+    }
+    
     // MARK: - ACTIONS
     private var actionsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -509,14 +552,6 @@ struct ForecastView: View {
                     saveSearchAction()
                 } label: {
                     Label("Aggiungi al tuo garage", systemImage: "square.and.arrow.down")
-                }
-                .buttonStyle(PrimaryButtonStyle())
-                .padding(.horizontal, 16)
-                
-                NavigationLink {
-                    VehicleComparisonView(referenceForecast: userCarForecast)
-                } label: {
-                    Label("Confronta con altre auto", systemImage: "arrow.left.arrow.right")
                 }
                 .buttonStyle(PrimaryButtonStyle())
                 .padding(.horizontal, 16)
@@ -731,7 +766,7 @@ struct ForecastView: View {
 //        let currentYear = Calendar.current.component(.year, from: Date())
 //        _selectedYear = State(initialValue: currentYear)
 //    }
-//    
+//
 //    var vehicleName: String {
 //        "\(userCarForecast.userCar.brand) \(userCarForecast.userCar.model)"
 //    }
@@ -753,7 +788,7 @@ struct ForecastView: View {
 //    }
 //
 //    var body: some View {
-//        
+//
 //        let currentYear = Calendar.current.component(.year, from: Date())
 //        let startYearRange = currentYear
 //        let endYearRange = userCarForecast.userCar.registrationYear + 20
@@ -775,7 +810,7 @@ struct ForecastView: View {
 //                }
 //
 //                //MARK: - SLIDER
-//                Text("QUANTO VARRÁ LA TUA AUTO DOMANI?")
+//                Text("QUANTO VARRÀ LA TUA AUTO DOMANI?")
 //                    .font(.subheadline)
 //                    .fontWeight(.bold)
 //
@@ -855,7 +890,7 @@ struct ForecastView: View {
 //                        .shadow(radius: 2, y: 1)
 //                }
 //            }
-//            .padding(.horizontal, 16) 
+//            .padding(.horizontal, 16)
 //            .padding(.vertical)
 //        }
 //        .navigationTitle("Valore futuro")
@@ -936,4 +971,3 @@ struct ForecastView: View {
 //        }
 //    }
 //}
-
