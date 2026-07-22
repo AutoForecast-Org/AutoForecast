@@ -103,6 +103,9 @@
         }
       }
     },
+    "Aggiorna il confronto al valore stimato dopo %lld anni." : {
+
+    },
     "Aggiungi al tuo garage" : {
       "localizations" : {
         "en" : {
@@ -162,6 +165,9 @@
           }
         }
       }
+    },
+    "Anni dall'immatricolazione: %lld" : {
+
     },
     "Anno" : {
       "localizations" : {
@@ -258,6 +264,12 @@
           }
         }
       }
+    },
+    "Auto corrente" : {
+
+    },
+    "Auto di riferimento" : {
+
     },
     "Automatico" : {
       "localizations" : {
@@ -409,6 +421,15 @@
         }
       }
     },
+    "Confronta con altre auto" : {
+
+    },
+    "Confrontiamo la tua auto con modelli simili per alimentazione, segmento e fascia di prezzo." : {
+
+    },
+    "Curva svalutazione" : {
+
+    },
     "Dati" : {
       "localizations" : {
         "en" : {
@@ -448,6 +469,9 @@
           }
         }
       }
+    },
+    "Dettaglio confronto" : {
+
     },
     "Elaboro dati" : {
       "localizations" : {
@@ -648,6 +672,9 @@
           }
         }
       }
+    },
+    "Indicatore rapido: andamento storico del valore stimato." : {
+
     },
     "Informazioni sull'applicazione" : {
       "localizations" : {
@@ -969,6 +996,9 @@
         }
       }
     },
+    "Nessun risultato coerente trovato con i filtri attuali." : {
+
+    },
     "Nessuna selezione" : {
       "localizations" : {
         "en" : {
@@ -1089,6 +1119,12 @@
         }
       }
     },
+    "Ordinamento" : {
+
+    },
+    "Ordinamento risultati" : {
+
+    },
     "Oscillazione del valore" : {
       "localizations" : {
         "en" : {
@@ -1178,6 +1214,9 @@
           }
         }
       }
+    },
+    "Punteggio confronto" : {
+
     },
     "Quando conviene vendere" : {
       "localizations" : {

@@ -512,6 +512,14 @@ struct ForecastView: View {
                 }
                 .buttonStyle(PrimaryButtonStyle())
                 .padding(.horizontal, 16)
+                
+                NavigationLink {
+                    VehicleComparisonView(referenceForecast: userCarForecast)
+                } label: {
+                    Label("Confronta con altre auto", systemImage: "arrow.left.arrow.right")
+                }
+                .buttonStyle(PrimaryButtonStyle())
+                .padding(.horizontal, 16)
             }
             
 //            NavigationLink(destination: ForecastHowCalculateDataInfoView()) {
