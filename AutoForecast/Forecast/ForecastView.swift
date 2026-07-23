@@ -723,7 +723,6 @@ struct ForecastView: View {
                         Label("Apri confronto", systemImage: "arrow.left.arrow.right")
                     }
                     .buttonStyle(PrimaryButtonStyle())
-                    .padding(.horizontal, 16)
                 }
             }
         }

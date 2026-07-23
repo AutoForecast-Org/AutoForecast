@@ -491,6 +491,9 @@
         }
       }
     },
+    "Dati principali" : {
+
+    },
     "Dettaglio confronto" : {
 
     },
@@ -1607,6 +1610,9 @@
         }
       }
     },
+    "Un riepilogo visivo, con il valore stimato che cambia mentre esplori gli anni nel grafico." : {
+
+    },
     "Usa lo slider per spostarti rapidamente e i pulsanti per i piccoli aggiustamenti." : {
       "localizations" : {
         "en" : {
@@ -1706,6 +1712,9 @@
           }
         }
       }
+    },
+    "Valori aggiornati in base alla previsione selezionata." : {
+
     },
     "Versione" : {
       "localizations" : {
