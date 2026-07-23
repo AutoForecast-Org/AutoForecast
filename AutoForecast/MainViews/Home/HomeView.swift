@@ -26,12 +26,18 @@ struct HomeView: View {
                         
                         Spacer(minLength: 40)
                         
-                        HomeHeaderIconVIew()
+                        HomeHeroMarkView()
                         
-                        Spacer(minLength: 50)
+//                        Text("AUTOFORECAST")
+//                            .font(.caption.weight(.semibold))
+//                            .foregroundColor(.secondary)
+//                            .tracking(4)
                         
-                        Text("PREVISIONE DEL VALORE FUTURO DELL'AUTO")
-                            .font(.title)
+                        Spacer(minLength: 16)
+                        
+                        Text("Prevedi il valore futuro della tua auto")
+//                        Text("Prevedi il valore futuro dell'auto")
+                            .font(.largeTitle.weight(.bold))
                             .fontWeight(.bold)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal)
@@ -42,9 +48,11 @@ struct HomeView: View {
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 32)
                         
-                        Spacer(minLength: 50)
+                        Spacer(minLength: 16)
                         
                         HomeEvaluationButtonView(isEnabled: searchManager.isDataLoaded)
+                            .padding(.horizontal, 32)
+                            .frame(maxWidth: 520)
                         
                         Text("Basato su modelli di svalutazione e algoritmi di apprendimento automatico")
                             .font(.caption)
@@ -118,62 +126,156 @@ struct HomeView: View {
 //}
 
 // MARK: - HEADER ICON
-private struct HomeHeaderIconVIew: View {
+//private struct HomeHeaderIconVIew: View {
+//    var body: some View {
+//        ZStack {
+//            Circle()
+//                .fill(
+//                    LinearGradient(colors: [
+//                        ColorLayout.primary.auto,
+//                        ColorLayout.primary.auto
+//                    ],
+//                                   startPoint: .leading,
+//                                   endPoint: .trailing)
+//                )
+//                .frame(width: 200, height: 200)
+//                .shadow(radius: 8)
+//            
+//            Image("AutoForecastWhiteLogoAndText")
+//                .resizable()
+//                .renderingMode(.template)
+//                .foregroundColor(ColorLayout.white.auto)
+//                .scaledToFit()
+//                .frame(height: 170)
+//
+//        }
+//    }
+//}
+
+// MARK: - HERO MARK
+private struct HomeHeroMarkView: View {
     var body: some View {
         ZStack {
             Circle()
                 .fill(
-                    LinearGradient(colors: [
-                        ColorLayout.primary.auto,
-                        ColorLayout.primary.auto
-                    ],
-                                   startPoint: .leading,
-                                   endPoint: .trailing)
+                    RadialGradient(
+                        colors: [
+                            ColorLayout.primary.auto.opacity(1.0),
+                            ColorLayout.primary.auto.opacity(0.78)
+                        ],
+                        center: .topLeading,
+                        startRadius: 8,
+                        endRadius: 160
+                    )
                 )
-                .frame(width: 200, height: 200)
-                .shadow(radius: 8)
-            
+                .frame(width: 214, height: 214)
+                .shadow(color: ColorLayout.primary.auto.opacity(0.28), radius: 22, x: 0, y: 12)
+                .overlay {
+                    Circle()
+                        .stroke(Color.white.opacity(0.16), lineWidth: 1)
+                }
+
             Image("AutoForecastWhiteLogoAndText")
                 .resizable()
                 .renderingMode(.template)
                 .foregroundColor(ColorLayout.white.auto)
                 .scaledToFit()
-                .frame(height: 170)
-
+                .frame(width: 170)
+                .padding(.horizontal, 22)
+                .shadow(color: .black.opacity(0.20), radius: 10, x: 0, y: 8)
         }
+        .padding(.top, 4)
     }
 }
+
+// MARK: - EVALUATION BUTTON
+//private struct HomeEvaluationButtonView: View {
+//    var isEnabled: Bool
+//    @Environment(\.navigate) private var navigate
+//    
+//    var body: some View {
+//        Button {
+//            navigate.append(.parametersView)
+//        } label: {
+//            Label("START", systemImage: "chart.line.text.clipboard")
+//                .font(.headline)
+//                .foregroundColor(ColorLayout.white.auto)
+//                .padding()
+//                .frame(maxWidth: .infinity)
+//                .background(
+//                    LinearGradient(colors: [
+//                        ColorLayout.primary.auto,
+//                        ColorLayout.primary.auto],
+//                                   startPoint: .leading,
+//                                   endPoint: .trailing)
+//                )
+//                .cornerRadius(18)
+//                .shadow(radius: 8, y: 4)
+//        }
+//        .padding(.horizontal, 32)
+//        .disabled(!isEnabled)
+//        .opacity(isEnabled ? 1.0 : 0.5) // Optionally make it look disabled
+//    }
+//}
+
 
 // MARK: - EVALUATION BUTTON
 private struct HomeEvaluationButtonView: View {
     var isEnabled: Bool
     @Environment(\.navigate) private var navigate
-    
+
     var body: some View {
         Button {
+            guard isEnabled else { return }
             navigate.append(.parametersView)
         } label: {
-            Label("START", systemImage: "chart.line.text.clipboard")
-                .font(.headline)
-                .foregroundColor(ColorLayout.white.auto)
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(
-                    LinearGradient(colors: [
+            HStack(spacing: 12) {
+                Image(systemName: isEnabled ? "sparkles" : "hourglass")
+                    .font(.headline)
+
+                VStack(alignment: .leading, spacing: 2) {
+//                    Text(isEnabled ? "Inizia la previsione" : "Caricamento dati...")
+                    Text(isEnabled ? "Inizia la previsione" : "Caricamento dati...")
+                        .font(.headline.weight(.semibold))
+                        .lineLimit(1)
+//                        .tracking(4)
+
+//                    Text(isEnabled ? "Personalizza il profilo della tua auto" : "Preparazione dei dati in corso")
+                    Text(isEnabled ? "Scopri la proiezione per la tua auto" : "Preparazione dei dati in corso")
+                        .font(.caption)
+                        .foregroundColor(ColorLayout.white.auto.opacity(0.85))
+                        .lineLimit(1)
+                }
+
+                Spacer(minLength: 8)
+
+                Image(systemName: "chevron.right")
+                    .font(.subheadline.weight(.semibold))
+                    .opacity(0.95)
+            }
+            .foregroundColor(ColorLayout.white.auto)
+            .padding(.horizontal, 18)
+            .padding(.vertical, 16)
+            .background(
+                LinearGradient(
+                    colors: [
                         ColorLayout.primary.auto,
-                        ColorLayout.primary.auto],
-                                   startPoint: .leading,
-                                   endPoint: .trailing)
+                        ColorLayout.primary.auto.opacity(0.84)
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
                 )
-                .cornerRadius(18)
-                .shadow(radius: 8, y: 4)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+            .shadow(color: ColorLayout.primary.auto.opacity(0.30), radius: 16, x: 0, y: 10)
+            .overlay {
+                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                    .stroke(Color.white.opacity(0.12), lineWidth: 1)
+            }
         }
-        .padding(.horizontal, 32)
         .disabled(!isEnabled)
-        .opacity(isEnabled ? 1.0 : 0.5) // Optionally make it look disabled
+        .opacity(isEnabled ? 1.0 : 0.74)
+        .padding(.horizontal, 12)
     }
 }
-
-
-
 

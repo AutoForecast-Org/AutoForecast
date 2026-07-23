@@ -347,6 +347,9 @@
         }
       }
     },
+    "Caricamento dati..." : {
+
+    },
     "CATEGORIA AUTO" : {
       "localizations" : {
         "en" : {
@@ -717,6 +720,9 @@
           }
         }
       }
+    },
+    "Inizia la previsione" : {
+
     },
     "Inserisci l'oggetto" : {
       "localizations" : {
@@ -1180,6 +1186,12 @@
         }
       }
     },
+    "Preparazione dei dati in corso" : {
+
+    },
+    "Prevedi il valore futuro della tua auto" : {
+
+    },
     "Previsione" : {
       "localizations" : {
         "en" : {
@@ -1191,6 +1203,7 @@
       }
     },
     "PREVISIONE DEL VALORE FUTURO DELL'AUTO" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1335,6 +1348,9 @@
           }
         }
       }
+    },
+    "Scopri la proiezione per la tua auto" : {
+
     },
     "Scorri gli anni per conoscerne la valutazione" : {
       "localizations" : {
@@ -1497,6 +1513,7 @@
       }
     },
     "START" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
