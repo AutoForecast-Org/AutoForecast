@@ -167,7 +167,7 @@ struct CarValuePredictionCardView: View {
                         CardRow(title: "Modello", value: selectedModel ?? String(localized: "Seleziona il modello"), icon: "text.page.badge.magnifyingglass")
                     }
                 } else {
-                    CardRow(title: "Modello", value: String(localized: "Seleziona il modello"), icon: "text.page.badge.magnifyingglass")
+                    CardRow(title: "Modello", value: String(localized: "Seleziona il modello"), icon: "text.page.badge.magnifyingglass", isEnabled: false)
                         .opacity(0.4)
                 }
                 
@@ -191,7 +191,7 @@ struct CarValuePredictionCardView: View {
                         CardRow(title: "Motore", value: selectedEngine ?? String(localized: "Seleziona il motore"), icon: "engine.combustion")
                     }
                 } else {
-                    CardRow(title: "Motore", value: String(localized: "Seleziona il motore"), icon: "engine.combustion")
+                    CardRow(title: "Motore", value: String(localized: "Seleziona il motore"), icon: "engine.combustion", isEnabled: false)
                         .opacity(0.4)
                 }
                 
@@ -214,7 +214,7 @@ struct CarValuePredictionCardView: View {
                         CardRow(title: "Anno di 1° immatricolazione", value: selectedYear ?? String(localized: "Seleziona l'anno"), icon: "calendar")
                     }
                 } else {
-                    CardRow(title: "Anno di 1° immatricolazione", value: String(localized: "Seleziona l'anno"), icon: "calendar")
+                    CardRow(title: "Anno di 1° immatricolazione", value: String(localized: "Seleziona l'anno"), icon: "calendar", isEnabled: false)
                         .opacity(0.4)
                 }
                 
@@ -380,6 +380,7 @@ struct CardRow: View {
     var title: LocalizedStringResource
     var value: String
     var icon: String
+    var isEnabled: Bool = true
     
     var body: some View {
         HStack {
@@ -395,8 +396,10 @@ struct CardRow: View {
                     
             }
             Spacer()
-            Image(systemName: "chevron.right")
-                .foregroundColor(ColorLayout.gray3.auto)
+            if isEnabled {
+                Image(systemName: "chevron.right")
+                    .foregroundColor(ColorLayout.gray3.auto)
+            }
         }
         .padding()
         .background(ColorLayout.cardRowBackgroud.auto)
