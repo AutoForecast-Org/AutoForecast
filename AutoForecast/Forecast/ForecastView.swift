@@ -101,11 +101,76 @@ struct ForecastView: View {
         return DepreciationTrend.from(annualChange: annualChange)
     }
 
+    private var selectedForecastPoint: DepreciationPoint? {
+        userCarForecast.data.first(where: { $0.year == selectedYear })
+    }
+
+    private var selectedForecastValueText: String {
+        guard let point = selectedForecastPoint else { return "—" }
+        return Int(point.value.rounded()).formatted(.currency(code: "EUR"))
+    }
+
+    private var currentYear: Int {
+        Calendar.current.component(.year, from: Date())
+    }
+
+    private var todayForecastValue: Double? {
+        if let exact = userCarForecast.data.first(where: { $0.year == currentYear }) {
+            return exact.value
+        }
+
+        let nearestFuture = userCarForecast.data
+            .filter { $0.year > currentYear }
+            .sorted(by: { $0.year < $1.year })
+            .first
+
+        return nearestFuture?.value ?? userCarForecast.data.sorted(by: { $0.year < $1.year }).last?.value
+    }
+
+    private var todayForecastValueText: String {
+        guard let value = todayForecastValue else { return "—" }
+        return Int(value.rounded()).formatted(.currency(code: "EUR"))
+    }
+
+    private var deltaFromListPrice: Double? {
+        guard let selectedValue = selectedForecastPoint?.value,
+              userCarForecast.purchasePrice > 0 else {
+            return nil
+        }
+        return (selectedValue - userCarForecast.purchasePrice) / userCarForecast.purchasePrice
+    }
+
+    private var deltaFromListPriceText: String {
+        guard let delta = deltaFromListPrice else { return "—" }
+
+        let sign = delta > 0 ? "+" : ""
+        let percentage = abs(delta)
+            .formatted(.percent.precision(.fractionLength(1)))
+        return delta < 0 ? "-\(percentage)" : "\(sign)\(percentage)"
+    }
+
+    private var deltaFromListPriceColor: Color {
+        guard let delta = deltaFromListPrice else { return .secondary }
+        if delta > 0 { return ColorLayout.green.auto }
+        if delta < 0 { return ColorLayout.red.auto }
+        return .secondary
+    }
+
+    private var bestSellingValueText: String {
+        guard let best = bestSellingPoint else { return "—" }
+        return Int(best.value.rounded()).formatted(.currency(code: "EUR"))
+    }
+
+    private var shouldShowActionsCard: Bool {
+        (!userCarForecast.isSaved && !userCarForecast.isExmample) || userCarForecast.isExmample
+    }
+
     // MARK: - Body
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 18) {
                 headerSection
+                heroSection
 //                sliderSection
 //                chartSection
                 forecastSection
@@ -183,33 +248,139 @@ struct ForecastView: View {
 
     // MARK: - HEADER
     private var headerSection: some View {
-//        VStack(alignment: .leading, spacing: 12) {
-//            SectionTitle("Informazioni veicolo", systemImage: "car.fill")
+        SectionCard {
+            VStack(alignment: .leading, spacing: 14) {
+                Label("Informazioni veicolo", systemImage: "car.fill")
+                    .font(.caption.bold())
+                    .foregroundColor(ColorLayout.primary.auto)
+                    .textCase(.uppercase)
 
-            SectionCard {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text("Informazioni veicolo")
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(vehicleName)
                         .font(.title2)
                         .fontWeight(.bold)
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text(vehicleName)
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                        
-                        Text(versionAndEngine)
-                            .font(.subheadline)
-                        
-                        Text(vehicleListPrice)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        
-                        Text(yearAndKms)
+
+                    Text(versionAndEngine)
+                        .font(.subheadline)
+
+                    Text(vehicleListPrice)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+
+                    Text(yearAndKms)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+    }
+
+    private var heroSection: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            ColorLayout.primary.auto.opacity(0.12),
+                            ColorLayout.cardRowBackgroud.auto,
+                            ColorLayout.cardRowBackgroud.auto
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .stroke(Color.primary.opacity(0.08), lineWidth: 1)
+
+            VStack(alignment: .leading, spacing: 18) {
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label("Sintesi finale", systemImage: "sparkles")
+                            .font(.caption.bold())
+                            .foregroundColor(ColorLayout.primary.auto)
+                            .textCase(.uppercase)
+
+                        Text("La tua previsione in evidenza")
+                            .font(.title2)
+                            .fontWeight(.bold)
+
+                        Text("Un riepilogo visivo, con il valore stimato che cambia mentre esplori gli anni nel grafico.")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
+
+                    Spacer()
+                }
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Dati principali")
+                        .font(.headline)
+
+                    Text("Valori aggiornati in base alla previsione selezionata.")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+
+                VStack(spacing: 12) {
+                    forecastHeroRow(
+                        title: "Valore odierno",
+                        value: todayForecastValueText,
+                        systemImage: "calendar"
+                    )
+
+                    forecastHeroRow(
+                        title: "Valore anno \(selectedYear)",
+                        value: selectedForecastValueText,
+                        systemImage: "calendar.badge.clock"
+                    )
+
+                    forecastHeroRow(
+                        title: "Scostamento dal listino",
+                        value: deltaFromListPriceText,
+                        systemImage: "arrow.left.arrow.right",
+                        valueColor: deltaFromListPriceColor
+                    )
                 }
             }
-//        }
+            .padding(20)
+        }
+        .padding(.horizontal, 8)
+    }
+
+    private func forecastHeroRow(
+        title: String,
+        value: String,
+        systemImage: String,
+        valueColor: Color = .primary
+    ) -> some View {
+        HStack(spacing: 10) {
+            Label {
+                Text(title)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            } icon: {
+                Image(systemName: systemImage)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundColor(ColorLayout.primary.auto)
+            }
+
+            Spacer()
+
+            Text(value)
+                .font(.headline)
+                .foregroundColor(valueColor)
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+        .background(ColorLayout.appBackround.auto.opacity(0.06))
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(Color.primary.opacity(0.08), lineWidth: 1)
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 
     private var forecastSection: some View {
@@ -218,6 +389,14 @@ struct ForecastView: View {
             
             SectionCard {
                 VStack(spacing: 16) {
+                    HStack {
+                        Label("Previsione valore", systemImage: "chart.xyaxis.line")
+                            .font(.caption.bold())
+                            .foregroundColor(ColorLayout.primary.auto)
+                            .textCase(.uppercase)
+                        Spacer()
+                    }
+
                     HStack(alignment: .top) {
                         
                         VStack(alignment: .leading, spacing: 16) {
@@ -370,7 +549,12 @@ struct ForecastView: View {
                 SectionCard {
                     
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Quando conviene vendere")
+                        Label("Quando conviene vendere", systemImage: "clock.arrow.circlepath")
+                            .font(.caption.bold())
+                            .foregroundColor(ColorLayout.primary.auto)
+                            .textCase(.uppercase)
+
+                        Text("Il tuo anno più favorevole")
                             .font(.title2)
                             .fontWeight(.bold)
                         HStack {
@@ -385,7 +569,7 @@ struct ForecastView: View {
                             Spacer()
                             
                             VStack(alignment: .trailing) {
-                                Text(Int(best.value.rounded()), format: .currency(code: "EUR"))
+                                Text(bestSellingValueText)
                                     .font(.title3)
                                     .fontWeight(.bold)
                                     .foregroundColor(ColorLayout.green.auto)
@@ -484,6 +668,11 @@ struct ForecastView: View {
         VStack(alignment: .leading, spacing: 16) {
             SectionCard {
                 VStack(alignment: .leading, spacing: 16) {
+                    Label("Metodologia AI", systemImage: "brain")
+                        .font(.caption.bold())
+                        .foregroundColor(ColorLayout.primary.auto)
+                        .textCase(.uppercase)
+
                     Text("Come l'AI ci aiuta a calcolare i dati?")
                         .font(.title2)
                     
@@ -507,6 +696,11 @@ struct ForecastView: View {
         VStack(alignment: .leading, spacing: 16) {
             SectionCard {
                 VStack(alignment: .leading, spacing: 16) {
+                    Label("Confronto", systemImage: "arrow.left.arrow.right")
+                        .font(.caption.bold())
+                        .foregroundColor(ColorLayout.primary.auto)
+                        .textCase(.uppercase)
+
                     Text("Confronto auto")
                         .font(.title2)
                         .fontWeight(.bold)
@@ -547,14 +741,49 @@ struct ForecastView: View {
 //            }
 //            .buttonStyle(PrimaryButtonStyle())
             
-            if !userCarForecast.isSaved && !userCarForecast.isExmample {
-                Button {
-                    saveSearchAction()
-                } label: {
-                    Label("Aggiungi al tuo garage", systemImage: "square.and.arrow.down")
+            if shouldShowActionsCard {
+                SectionCard {
+                    VStack(alignment: .leading, spacing: 14) {
+                        Label("Azioni rapide", systemImage: "bolt.fill")
+                            .font(.caption.bold())
+                            .foregroundColor(ColorLayout.primary.auto)
+                            .textCase(.uppercase)
+
+                        if !userCarForecast.isSaved && !userCarForecast.isExmample {
+                            Button {
+                                saveSearchAction()
+                            } label: {
+                                Label("Aggiungi al tuo garage", systemImage: "square.and.arrow.down")
+                            }
+                            .buttonStyle(PrimaryButtonStyle())
+                        }
+
+                        if userCarForecast.isExmample {
+                            Button {
+                                if let url = StaticReportProvider.exampleReportURL() {
+                                    reportToPreview = IdentifiableURL(url: url)
+                                }
+                            } label: {
+                                Label("Scarica report", systemImage: "doc.text.fill")
+                            }
+                            .buttonStyle(PrimaryButtonStyle())
+                            .sheet(item: $reportToPreview) { item in
+                                NavigationStack {
+                                    PDFPreviewView(url: item.url)
+                                        .navigationTitle("Report")
+                                        .navigationBarTitleDisplayMode(.inline)
+                                        .toolbar {
+                                            ToolbarItem(placement: .topBarTrailing) {
+                                                ShareLink(item: item.url) {
+                                                    Image(systemName: "square.and.arrow.up")
+                                                }
+                                            }
+                                        }
+                                }
+                            }
+                        }
+                    }
                 }
-                .buttonStyle(PrimaryButtonStyle())
-                .padding(.horizontal, 16)
             }
             
 //            NavigationLink(destination: ForecastHowCalculateDataInfoView()) {
@@ -568,31 +797,6 @@ struct ForecastView: View {
 //                    .shadow(radius: 2, y: 1)
 //            }
 
-            if userCarForecast.isExmample {
-                Button {
-                    if let url = StaticReportProvider.exampleReportURL() {
-                        reportToPreview = IdentifiableURL(url: url)
-                    }
-                } label: {
-                    Label("Scarica report", systemImage: "doc.text.fill")
-                }
-                .buttonStyle(PrimaryButtonStyle())
-                .padding(.horizontal, 16)
-                .sheet(item: $reportToPreview) { item in
-                    NavigationStack {
-                        PDFPreviewView(url: item.url)
-                            .navigationTitle("Report")
-                            .navigationBarTitleDisplayMode(.inline)
-                            .toolbar {
-                                ToolbarItem(placement: .topBarTrailing) {
-                                    ShareLink(item: item.url) {
-                                        Image(systemName: "square.and.arrow.up")
-                                    }
-                                }
-                            }
-                    }
-                }
-            }
         }
     }
     

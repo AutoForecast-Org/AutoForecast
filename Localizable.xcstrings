@@ -294,6 +294,9 @@
         }
       }
     },
+    "Azioni rapide" : {
+
+    },
     "Badge rapidi: Piu conveniente e Piu stabile" : {
 
     },
@@ -436,6 +439,9 @@
     "Confrontiamo la tua auto con modelli simili per alimentazione, segmento e fascia di prezzo." : {
 
     },
+    "Confronto" : {
+
+    },
     "Confronto auto" : {
 
     },
@@ -484,6 +490,9 @@
           }
         }
       }
+    },
+    "Dati principali" : {
+
     },
     "Dettaglio confronto" : {
 
@@ -657,6 +666,9 @@
           }
         }
       }
+    },
+    "Il tuo anno più favorevole" : {
+
     },
     "Il tuo garage" : {
       "localizations" : {
@@ -864,6 +876,9 @@
         }
       }
     },
+    "La tua previsione in evidenza" : {
+
+    },
     "La tua stima nel %@" : {
       "localizations" : {
         "en" : {
@@ -956,6 +971,9 @@
           }
         }
       }
+    },
+    "Metodologia AI" : {
+
     },
     "Modelli AI e ML addestrati su grandi serie storiche." : {
       "localizations" : {
@@ -1212,6 +1230,9 @@
           }
         }
       }
+    },
+    "Previsione valore" : {
+
     },
     "Prezzo di listino" : {
       "localizations" : {
@@ -1502,6 +1523,9 @@
         }
       }
     },
+    "Sintesi finale" : {
+
+    },
     "Sovrascrivi" : {
       "localizations" : {
         "en" : {
@@ -1585,6 +1609,9 @@
           }
         }
       }
+    },
+    "Un riepilogo visivo, con il valore stimato che cambia mentre esplori gli anni nel grafico." : {
+
     },
     "Usa lo slider per spostarti rapidamente e i pulsanti per i piccoli aggiustamenti." : {
       "localizations" : {
@@ -1685,6 +1712,9 @@
           }
         }
       }
+    },
+    "Valori aggiornati in base alla previsione selezionata." : {
+
     },
     "Versione" : {
       "localizations" : {

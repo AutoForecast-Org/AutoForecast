@@ -42,10 +42,28 @@ struct SectionCard<Content: View>: View {
 
     var body: some View {
         content
-            .padding()
+            .padding(18)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(ColorLayout.cardRowBackgroud.auto)
-//            .cornerRadius(16)
+            .background(
+                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                ColorLayout.primary.auto.opacity(0.08),
+                                ColorLayout.cardRowBackgroud.auto,
+                                ColorLayout.cardRowBackgroud.auto
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                    .stroke(Color.primary.opacity(0.08), lineWidth: 1)
+            )
+            .shadow(color: Color.black.opacity(0.06), radius: 12, x: 0, y: 4)
+            .padding(.horizontal, 8)
     }
 }
 
@@ -58,12 +76,14 @@ struct PrimaryButtonStyle: ButtonStyle {
             .padding()
             .background(
                 LinearGradient(
-                    colors: [ColorLayout.primary.auto, ColorLayout.primary.auto],
+                    colors: [ColorLayout.primary.auto, ColorLayout.primary.auto.opacity(0.88)],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
             )
-            .cornerRadius(16)
-            .opacity(configuration.isPressed ? 0.85 : 1)
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .shadow(color: ColorLayout.primary.auto.opacity(configuration.isPressed ? 0.12 : 0.22), radius: 10, x: 0, y: 6)
+            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+            .opacity(configuration.isPressed ? 0.92 : 1)
     }
 }
