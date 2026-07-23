@@ -91,37 +91,101 @@ struct SummaryCarInfoView: View {
 struct AnimatedProgressOverlay: View {
     let messages: [LocalizedStringResource]
     @State private var currentIndex = 0
+    @State private var showCard = false
+    @State private var breathe = false
+    @State private var messageTask: Task<Void, Never>? = nil
+
+    private let phaseDuration: Double = 2.2
 
     var body: some View {
-        VStack(spacing: 20) {
-
-            ZStack {
-                ForEach(messages.indices, id: \.self) { index in
-                    if index == currentIndex {
-                        Text(messages[index])
-                            .foregroundColor(.primary)
-                            .font(.headline)
-                            .transition(.move(edge: .bottom).combined(with: .opacity))
+        VStack(spacing: 22) {
+            VStack(spacing: 10) {
+                ZStack {
+                    ForEach(messages.indices, id: \.self) { index in
+                        if index == currentIndex {
+                            Text(messages[index])
+                                .foregroundStyle(.primary)
+                                .font(.headline.weight(.semibold))
+                                .id(index)
+                                .transition(
+                                    .asymmetric(
+                                        insertion: .opacity.combined(with: .scale(scale: 0.98)).combined(with: .move(edge: .bottom)),
+                                        removal: .opacity.combined(with: .scale(scale: 1.01)).combined(with: .move(edge: .top))
+                                    )
+                                )
+                        }
                     }
                 }
+                .frame(height: 30)
+
+                Text("Sto preparando la previsione")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
             }
-            .frame(height: 30)
 
             InfiniteLinearProgress()
         }
-        .padding(40)
-        .background(Color(.systemBackground).opacity(0.8))
-        .cornerRadius(16)
-        .shadow(radius: 10)
+        .padding(.horizontal, 28)
+        .padding(.vertical, 24)
+        .background(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(.ultraThinMaterial)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .stroke(
+                            LinearGradient(
+                                colors: [
+                                    Color.white.opacity(0.55),
+                                    Color.white.opacity(0.18),
+                                    ColorLayout.primary.auto.opacity(0.35)
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1.1
+                        )
+                )
+                .overlay(alignment: .top) {
+                    LinearGradient(
+                        colors: [Color.white.opacity(0.25), .clear],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .frame(height: 46)
+                    .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+                }
+        )
+        .shadow(color: .black.opacity(0.22), radius: 28, x: 0, y: 16)
+        .shadow(color: ColorLayout.primary.auto.opacity(0.14), radius: 14, x: 0, y: 4)
+        .scaleEffect(showCard ? (breathe ? 1.0 : 0.988) : 0.95)
+        .opacity(showCard ? 1 : 0)
+        .animation(.spring(response: 0.56, dampingFraction: 0.88), value: showCard)
+        .animation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true), value: breathe)
         .onAppear {
+            showCard = true
+            breathe = true
             startMessageLoop()
+        }
+        .onDisappear {
+            messageTask?.cancel()
+            messageTask = nil
         }
     }
 
     private func startMessageLoop() {
-        Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true) { _ in
-            withAnimation(.easeInOut(duration: 0.6)) {
-                currentIndex = (currentIndex + 1) % messages.count
+        guard !messages.isEmpty else { return }
+        messageTask?.cancel()
+
+        messageTask = Task {
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: UInt64(phaseDuration * 1_000_000_000))
+                if Task.isCancelled { break }
+
+                await MainActor.run {
+                    withAnimation(.spring(response: 0.6, dampingFraction: 0.9, blendDuration: 0.2)) {
+                        currentIndex = (currentIndex + 1) % messages.count
+                    }
+                }
             }
         }
     }
@@ -129,30 +193,53 @@ struct AnimatedProgressOverlay: View {
 
 
 struct InfiniteLinearProgress: View {
-    @State private var offset: CGFloat = -100
+    @State private var beamOffset: CGFloat = -150
 
     var body: some View {
         ZStack(alignment: .leading) {
             Capsule()
-                .fill(Color.gray.opacity(0.3))
-                .frame(height: 6)
-                .overlay(
-                    Capsule()
-                        .fill(ColorLayout.primary.auto)
-                        .frame(width: 100, height: 6)
-                        .offset(x: offset)
-                        .animation(
-                            Animation.linear(duration: 1.2)
-                                .repeatForever(autoreverses: false),
-                            value: offset
+                .fill(Color.primary.opacity(0.14))
+                .frame(height: 8)
+
+            // Single moving beam: gradient body + integrated gloss to keep everything synchronized.
+            ZStack {
+                Capsule()
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                ColorLayout.primary.auto.opacity(0.34),
+                                ColorLayout.primary.auto,
+                                ColorLayout.primary.auto.opacity(0.62)
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing
                         )
-                )
-                .clipped()
+                    )
+
+                Capsule()
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                .clear,
+                                Color.white.opacity(0.5),
+                                .clear
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .padding(.vertical, 1)
+            }
+            .frame(width: 132, height: 8)
+            .offset(x: beamOffset)
+            .shadow(color: ColorLayout.primary.auto.opacity(0.18), radius: 2, x: 0, y: 0)
         }
-        .frame(width: 250, height: 6)
+        .frame(width: 250, height: 8)
+        .clipped()
         .onAppear {
-            offset = 250
+            withAnimation(.linear(duration: 1.35).repeatForever(autoreverses: false)) {
+                beamOffset = 250
+            }
         }
     }
 }
-
