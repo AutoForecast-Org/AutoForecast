@@ -109,7 +109,6 @@ struct VehicleComparisonView: View {
                     candidates: otherBrandCandidates
                 )
             }
-            .padding(.horizontal, 16)
             .padding(.vertical)
         }
         .background(ColorLayout.appBackround.auto.ignoresSafeArea())
@@ -150,7 +149,7 @@ struct VehicleComparisonView: View {
     }
 
     private var introSection: some View {
-        SectionCard {
+        VStack(alignment: .leading, spacing: 8) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Auto di riferimento")
                     .font(.headline)
@@ -158,23 +157,24 @@ struct VehicleComparisonView: View {
                 Text("Confrontiamo la tua auto con modelli simili per alimentazione, segmento e fascia di prezzo.")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
-
-                ComparisonVehicleCard(
-                    title: "\(referenceForecast.userCar.brand) \(referenceForecast.userCar.model)",
-                    subtitle: referenceForecast.userCar.version,
-                    fuel: referenceResolvedCar?.fuel,
-                    engine: referenceForecast.userCar.engine,
-                    year: referenceForecast.userCar.registrationYear,
-                    segment: referenceResolvedCar?.category,
-                    startingPrice: referenceForecast.purchasePrice,
-                    currentPrice: referenceCurrentValue,
-                    selectedAgeOffset: selectedAgeOffset,
-                    isReference: true,
-                    badges: [],
-                    isInteractive: false,
-                    rankLabel: nil
-                )
             }
+            .padding(.horizontal, 8)
+
+            ComparisonVehicleCard(
+                title: "\(referenceForecast.userCar.brand) \(referenceForecast.userCar.model)",
+                subtitle: referenceForecast.userCar.version,
+                fuel: referenceResolvedCar?.fuel,
+                engine: referenceForecast.userCar.engine,
+                year: referenceForecast.userCar.registrationYear,
+                segment: referenceResolvedCar?.category,
+                startingPrice: referenceForecast.purchasePrice,
+                currentPrice: referenceCurrentValue,
+                selectedAgeOffset: selectedAgeOffset,
+                isReference: true,
+                badges: [],
+                isInteractive: false,
+                rankLabel: nil
+            )
         }
     }
 
@@ -204,10 +204,12 @@ struct VehicleComparisonView: View {
             Text(title)
                 .font(.title3)
                 .fontWeight(.bold)
+                .padding(.horizontal, 8)
 
             Text(subtitle)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
+                .padding(.horizontal, 8)
 
             if candidates.isEmpty {
                 SectionCard {
