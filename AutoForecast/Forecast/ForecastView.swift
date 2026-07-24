@@ -301,11 +301,11 @@ struct ForecastView: View {
                             .foregroundColor(ColorLayout.primary.auto)
                             .textCase(.uppercase)
 
-                        Text("La tua previsione in evidenza")
+                        Text("Rapida sintesi")
                             .font(.title2)
                             .fontWeight(.bold)
 
-                        Text("Un riepilogo visivo, con il valore stimato che cambia mentre esplori gli anni nel grafico.")
+                        Text("Un riepilogo con i principali valori che cambiano mentre esplori gli anni nel grafico.")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -554,7 +554,7 @@ struct ForecastView: View {
                             .foregroundColor(ColorLayout.primary.auto)
                             .textCase(.uppercase)
 
-                        Text("Il tuo anno più favorevole")
+                        Text("L'anno migliore in cui vendere")
                             .font(.title2)
                             .fontWeight(.bold)
                         HStack {

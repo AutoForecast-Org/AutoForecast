@@ -876,9 +876,6 @@
         }
       }
     },
-    "La tua previsione in evidenza" : {
-
-    },
     "La tua stima nel %@" : {
       "localizations" : {
         "en" : {
@@ -1287,6 +1284,9 @@
         }
       }
     },
+    "Rapida sintesi" : {
+
+    },
     "Recupero informazioni" : {
       "localizations" : {
         "en" : {
@@ -1610,7 +1610,7 @@
         }
       }
     },
-    "Un riepilogo visivo, con il valore stimato che cambia mentre esplori gli anni nel grafico." : {
+    "Un riepilogo con i principali valori che cambiano mentre esplori gli anni nel grafico." : {
 
     },
     "Usa lo slider per spostarti rapidamente e i pulsanti per i piccoli aggiustamenti." : {

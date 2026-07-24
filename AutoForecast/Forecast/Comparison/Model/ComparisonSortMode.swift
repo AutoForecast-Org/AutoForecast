@@ -27,7 +27,7 @@ enum ComparisonSortMode: String, CaseIterable, Identifiable {
     var helperText: String {
         switch self {
         case .similarityThenPrice:
-            return "Priorita a somiglianza (fuel/segmento/motore), poi prezzo vicino."
+            return "Decidi l'ordine con cui mostrare i risultati."
         case .closestPrice:
             return "Mostra prima i modelli piu vicini al prezzo di acquisto."
         case .bestRetention:
