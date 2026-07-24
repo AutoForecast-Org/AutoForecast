@@ -209,6 +209,16 @@
         }
       }
     },
+    "Anno di riferimento: %lld (eta veicolo: %lld anni)" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Anno di riferimento: %1$lld (eta veicolo: %2$lld anni)"
+          }
+        }
+      }
+    },
     "Anno migliore" : {
       "localizations" : {
         "en" : {
@@ -219,7 +229,18 @@
         }
       }
     },
+    "Anno: %@ • Km: %@ km" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Anno: %1$@ • Km: %2$@ km"
+          }
+        }
+      }
+    },
     "Anno: %lld • Km: %lld km" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -350,6 +371,9 @@
         }
       }
     },
+    "Candidata" : {
+
+    },
     "Caricamento dati..." : {
 
     },
@@ -446,6 +470,9 @@
 
     },
     "Confronto del valore stimato anno per anno" : {
+
+    },
+    "Confronto svalutazione" : {
 
     },
     "Curva svalutazione" : {
@@ -667,9 +694,6 @@
         }
       }
     },
-    "Il tuo anno più favorevole" : {
-
-    },
     "Il tuo garage" : {
       "localizations" : {
         "en" : {
@@ -785,6 +809,9 @@
           }
         }
       }
+    },
+    "L'anno migliore in cui vendere" : {
+
     },
     "L'app è gratuita?" : {
       "localizations" : {
@@ -1261,9 +1288,6 @@
         }
       }
     },
-    "Punteggio confronto" : {
-
-    },
     "Quando conviene vendere" : {
       "localizations" : {
         "en" : {
@@ -1326,6 +1350,9 @@
           }
         }
       }
+    },
+    "Riferimento" : {
+
     },
     "Salvata il %@" : {
       "localizations" : {

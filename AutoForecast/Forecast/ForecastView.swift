@@ -49,8 +49,8 @@ struct ForecastView: View {
     }
 
     private var vehicleListPrice: String {
-        let price = userCarForecast.purchasePrice
-            .formatted(.currency(code: "EUR"))
+        let price = Int(userCarForecast.purchasePrice.rounded())
+            .formatted(.currency(code: "EUR").precision(.fractionLength(0)))
         return String(localized: "Prezzo di listino: \(price)")
     }
 
@@ -63,7 +63,7 @@ struct ForecastView: View {
     }
 
     private var yearAndKms: String {
-        String(localized: "Anno: \(userCarForecast.userCar.registrationYear) • Km: \(userCarForecast.userCar.actualKm) km")
+        String(localized: "Anno: \(userCarForecast.userCar.registrationYear, format: .number.grouping(.never)) • Km: \(userCarForecast.userCar.actualKm, format: .number.grouping(.automatic)) km")
     }
 
     private var yearRange: ClosedRange<Double> {
@@ -107,7 +107,7 @@ struct ForecastView: View {
 
     private var selectedForecastValueText: String {
         guard let point = selectedForecastPoint else { return "—" }
-        return Int(point.value.rounded()).formatted(.currency(code: "EUR"))
+        return Int(point.value.rounded()).formatted(.currency(code: "EUR").precision(.fractionLength(0)))
     }
 
     private var currentYear: Int {
@@ -129,7 +129,7 @@ struct ForecastView: View {
 
     private var todayForecastValueText: String {
         guard let value = todayForecastValue else { return "—" }
-        return Int(value.rounded()).formatted(.currency(code: "EUR"))
+        return Int(value.rounded()).formatted(.currency(code: "EUR").precision(.fractionLength(0)))
     }
 
     private var deltaFromListPrice: Double? {
@@ -158,7 +158,7 @@ struct ForecastView: View {
 
     private var bestSellingValueText: String {
         guard let best = bestSellingPoint else { return "—" }
-        return Int(best.value.rounded()).formatted(.currency(code: "EUR"))
+        return Int(best.value.rounded()).formatted(.currency(code: "EUR").precision(.fractionLength(0)))
     }
 
     private var shouldShowActionsCard: Bool {
