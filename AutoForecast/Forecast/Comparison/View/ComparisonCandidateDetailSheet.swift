@@ -51,6 +51,10 @@ struct ComparisonCandidateDetailSheet: View {
         "Valore \(comparisonYear)"
     }
 
+    private var comparisonYearText: String {
+        String(comparisonYear)
+    }
+
     private var referenceLoss: Double {
         max(referenceStartingPrice - referenceCurrentPrice, 0)
     }
@@ -103,7 +107,7 @@ struct ComparisonCandidateDetailSheet: View {
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
 
-                            Text("Anno di riferimento: \(comparisonYear) (eta veicolo: \(selectedAgeOffset) anni)")
+                            Text("Anno di riferimento: \(comparisonYearText) (eta veicolo: \(selectedAgeOffset) anni)")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
 

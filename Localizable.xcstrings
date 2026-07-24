@@ -209,12 +209,12 @@
         }
       }
     },
-    "Anno di riferimento: %lld (eta veicolo: %lld anni)" : {
+    "Anno di riferimento: %@ (eta veicolo: %lld anni)" : {
       "localizations" : {
         "it" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Anno di riferimento: %1$lld (eta veicolo: %2$lld anni)"
+            "value" : "Anno di riferimento: %1$@ (eta veicolo: %2$lld anni)"
           }
         }
       }

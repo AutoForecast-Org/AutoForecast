@@ -12,7 +12,7 @@
 
 extension Double {
     var euroString: String {
-        formatted(.currency(code: "EUR"))
+        Int(self.rounded()).formatted(.currency(code: "EUR").precision(.fractionLength(0)))
     }
 
     var percentString: String {
