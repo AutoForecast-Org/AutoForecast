@@ -14,6 +14,12 @@ import SwiftUI
 struct FavouritesRow: View {
     let search: SavedSearch
 
+    private static let rowDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return formatter
+    }()
+
     var body: some View {
         HStack(spacing: 16) {
             ZStack {
@@ -40,17 +46,16 @@ struct FavouritesRow: View {
                 
                 Text("\(engineAndVersionString)")
                     .font(.subheadline)
-                    .foregroundColor(ColorLayout.gray3.auto.opacity(0.85))
+                    .foregroundColor(ColorLayout.gray3.auto)
                     .multilineTextAlignment(.leading)
                 
                 Text("\(String(search.registrationYear)) • \(search.actualKm) km")
                     .font(.subheadline)
-                    .foregroundColor(ColorLayout.gray3.auto.opacity(0.85))
+                    .foregroundColor(ColorLayout.gray3.auto)
                     .multilineTextAlignment(.leading)
 
                 Text("Salvata il \(formattedDate(search.createdAt))")
-//                Text("Salvata il \(search.createdAt.formatted(date: .abbreviated, time: .omitted))")
-                    .font(.caption2)
+                    .font(.caption)
                     .foregroundColor(ColorLayout.gray3.auto)
             }
 
@@ -59,16 +64,18 @@ struct FavouritesRow: View {
             Image(systemName: "chevron.right")
                 .foregroundColor(ColorLayout.gray3.auto)
         }
-        .padding()
+        .padding(14)
         .frame(maxWidth: .infinity)
         .background(ColorLayout.cardRowBackgroud.auto)
         .cornerRadius(16)
-        .shadow(radius: 3, y: 2)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(Color.primary.opacity(0.06), lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 3)
     }
     
     func formattedDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        return formatter.string(from: date)
+        Self.rowDateFormatter.string(from: date)
     }
 }

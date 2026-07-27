@@ -14,6 +14,10 @@ import SwiftUI
 struct FavouritesView: View {
     @EnvironmentObject var searchManager: SearchManager
 
+    private var savedCount: Int {
+        searchManager.savedSearches.count
+    }
+
     private var exampleForecast = ForecastView(
         userCarForecast: UserCarForecast(
             userCar: UserCar(
@@ -40,15 +44,7 @@ struct FavouritesView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-
-            // HEADER
-            Text("Il tuo garage")
-                .font(.title2)
-                .fontWeight(.bold)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-                .padding(.top, 24)
-                .padding(.bottom, 12)
+            headerSection
 
             if searchManager.savedSearches.isEmpty {
                 emptyState
@@ -57,6 +53,27 @@ struct FavouritesView: View {
             }
         }
         .background(ColorLayout.appBackround.auto)
+        .toolbar {
+            if !searchManager.savedSearches.isEmpty {
+                EditButton()
+            }
+        }
+    }
+
+    private var headerSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Il tuo garage")
+                .font(.title2)
+                .fontWeight(.bold)
+
+            Text(savedCount == 1 ? "1 auto salvata" : "\(savedCount) auto salvate")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 16)
+        .padding(.top, 24)
+        .padding(.bottom, 12)
     }
     
     private var favouritesList: some View {
@@ -66,9 +83,9 @@ struct FavouritesView: View {
                     forecastView(for: search)
                 } label: {
                     FavouritesRow(search: search)
-                        .padding(.vertical, 8)
+                        .padding(.vertical, 6)
                 }
-                .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
             }
@@ -82,30 +99,37 @@ struct FavouritesView: View {
             }
         }
         .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background(ColorLayout.appBackround.auto)
         .navigationLinkIndicatorVisibility(.hidden)
     }
 
     private var emptyState: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 18) {
             Spacer()
 
-            Text("Ancora nessuna valutazione è stata effettuata")
-                .font(.subheadline)
-                .opacity(0.8)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-
-            NavigationLink {
-                exampleForecast
-            } label: {
-                Text("Guarda un esempio →")
+            VStack(alignment: .leading, spacing: 14) {
+                
+                Text("Ancora nessuna auto salvata")
+                    .font(.headline)
+                
+                Text("Dopo la prima valutazione, potrai salvare la tua auto e trovarla qui nel tuo garage. Nel frattempo, esplora un esempio completo.")
                     .font(.subheadline)
-                    .fontWeight(.bold)
-                    .foregroundColor(ColorLayout.primary.auto)
+                    .foregroundStyle(.secondary)
+                
+                NavigationLink {
+                    exampleForecast
+                } label: {
+                    Text("Apri un esempio")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(PrimaryButtonStyle())
             }
-
+            .padding(.horizontal, 16)
+            
             Spacer()
         }
+        .padding(.bottom, 24)
     }
     
     private func forecastView(for search: SavedSearch) -> some View {

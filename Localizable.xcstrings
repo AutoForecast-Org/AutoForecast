@@ -53,6 +53,9 @@
         }
       }
     },
+    "%lld auto salvate" : {
+
+    },
     "%lld km" : {
       "localizations" : {
         "en" : {
@@ -92,6 +95,9 @@
           }
         }
       }
+    },
+    "1 auto salvata" : {
+
     },
     "Abbiamo analizzato i dati a nostra disposizione e abbiamo calcolato un'intervallo di valori tra cui potrebbe trovarsi la tua auto. Ricorda che le cifre potrebbero variare a seconda di fattori esterni quali le condizioni generali del veicolo, i chilometri percorsi e altre caratteristiche." : {
       "localizations" : {
@@ -146,7 +152,11 @@
         }
       }
     },
+    "Ancora nessuna auto salvata" : {
+
+    },
     "Ancora nessuna valutazione è stata effettuata" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -267,6 +277,9 @@
       }
     },
     "Apri confronto" : {
+
+    },
+    "Apri un esempio" : {
 
     },
     "Aree di colore" : {
@@ -524,6 +537,9 @@
     "Dettaglio confronto" : {
 
     },
+    "Dopo la prima valutazione, potrai salvare la tua auto e trovarla qui nel tuo garage. Nel frattempo, esplora un esempio completo." : {
+
+    },
     "Elaboro dati" : {
       "localizations" : {
         "en" : {
@@ -615,6 +631,7 @@
       }
     },
     "Guarda un esempio →" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
