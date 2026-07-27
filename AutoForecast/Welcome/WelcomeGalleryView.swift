@@ -15,12 +15,30 @@ struct WelcomeGalleryView: View {
     @State private var selection = 0
     let slides: [WelcomeSlide]
     @AppStorage("welcomeScreenAlreadyShown") var welcomeScreenAlreadyShown: Bool = false
+
+    private var isLastSlide: Bool {
+        selection == slides.count - 1
+    }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 16) {
+            HStack {
+                Spacer()
+
+                if !isLastSlide {
+                    Button("Salta") {
+                        welcomeScreenAlreadyShown = true
+                    }
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .padding(.trailing, 20)
+                    .padding(.top, 8)
+                }
+            }
+
             TabView(selection: $selection) {
                 ForEach(Array(slides.enumerated()), id: \.offset) { index, slide in
-                    WelcomeSlideView(slide: slide)
+                    WelcomeSlideView(slide: slide, index: index, total: slides.count)
                         .tag(index)
                 }
             }
@@ -28,13 +46,13 @@ struct WelcomeGalleryView: View {
             .animation(.easeInOut, value: selection)
             
             Button(action: {
-                if selection < slides.count - 1 {
+                if !isLastSlide {
                     selection += 1
                 } else {
-                    welcomeScreenAlreadyShown = true 
+                    welcomeScreenAlreadyShown = true
                 }
             }) {
-                Text(selection == slides.count - 1 ? "Inizia" : "Avanti")
+                Text(isLastSlide ? "Inizia" : "Avanti")
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(ColorLayout.primary.auto)
@@ -42,7 +60,8 @@ struct WelcomeGalleryView: View {
                     .cornerRadius(12)
                     .padding(.horizontal)
             }
-            .padding(.top, 20)
+            .padding(.bottom, 16)
         }
+        .background(ColorLayout.appBackround.auto)
     }
 }

@@ -1225,6 +1225,16 @@
         }
       }
     },
+    "Passo %lld di %lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Passo %1$lld di %2$lld"
+          }
+        }
+      }
+    },
     "Pop-up informativo" : {
       "localizations" : {
         "en" : {
@@ -1369,6 +1379,9 @@
       }
     },
     "Riferimento" : {
+
+    },
+    "Salta" : {
 
     },
     "Salvata il %@" : {
