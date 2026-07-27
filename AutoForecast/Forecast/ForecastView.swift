@@ -175,11 +175,17 @@ struct ForecastView: View {
 //                chartSection
                 forecastSection
 //                oscillationSection
-                bestSellingSection
+                if bestSellingPoint != nil {
+                    bestSellingSection
+                }
 //                depreciationIndicatorSection
+                if !userCarForecast.isExmample {
+                    comparisonSection
+                }
                 explanationSection
-                comparisonSection
-                actionsSection
+                if shouldShowActionsCard {
+                    actionsSection
+                }
             }
             .background(ColorLayout.appBackround.auto)
 
@@ -664,7 +670,7 @@ struct ForecastView: View {
 //    }
     
     // MARK: - COMPARISON SECTION
-    private var comparisonSection: some View {
+    private var explanationSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             SectionCard {
                 VStack(alignment: .leading, spacing: 16) {
@@ -675,6 +681,7 @@ struct ForecastView: View {
 
                     Text("Come l'AI ci aiuta a calcolare i dati?")
                         .font(.title2)
+                        .fontWeight(.bold)
                     
                     Text("Scopri come l'AI ci aiuta a calcolare i dati per aiutarti a prendere sempre la migliore decisione ")
                         .font(.subheadline)
@@ -692,7 +699,7 @@ struct ForecastView: View {
     
     
     // MARK: - EXPLANATION SECTION
-    private var explanationSection: some View {
+    private var comparisonSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             SectionCard {
                 VStack(alignment: .leading, spacing: 16) {
@@ -740,45 +747,43 @@ struct ForecastView: View {
 //            }
 //            .buttonStyle(PrimaryButtonStyle())
             
-            if shouldShowActionsCard {
-                SectionCard {
-                    VStack(alignment: .leading, spacing: 14) {
-                        Label("Azioni rapide", systemImage: "bolt.fill")
-                            .font(.caption.bold())
-                            .foregroundColor(ColorLayout.primary.auto)
-                            .textCase(.uppercase)
+            SectionCard {
+                VStack(alignment: .leading, spacing: 14) {
+                    Label("Azioni rapide", systemImage: "bolt.fill")
+                        .font(.caption.bold())
+                        .foregroundColor(ColorLayout.primary.auto)
+                        .textCase(.uppercase)
 
-                        if !userCarForecast.isSaved && !userCarForecast.isExmample {
-                            Button {
-                                saveSearchAction()
-                            } label: {
-                                Label("Aggiungi al tuo garage", systemImage: "square.and.arrow.down")
-                            }
-                            .buttonStyle(PrimaryButtonStyle())
+                    if !userCarForecast.isSaved && !userCarForecast.isExmample {
+                        Button {
+                            saveSearchAction()
+                        } label: {
+                            Label("Aggiungi al tuo garage", systemImage: "square.and.arrow.down")
                         }
+                        .buttonStyle(PrimaryButtonStyle())
+                    }
 
-                        if userCarForecast.isExmample {
-                            Button {
-                                if let url = StaticReportProvider.exampleReportURL() {
-                                    reportToPreview = IdentifiableURL(url: url)
-                                }
-                            } label: {
-                                Label("Scarica report", systemImage: "doc.text.fill")
+                    if userCarForecast.isExmample {
+                        Button {
+                            if let url = StaticReportProvider.exampleReportURL() {
+                                reportToPreview = IdentifiableURL(url: url)
                             }
-                            .buttonStyle(PrimaryButtonStyle())
-                            .sheet(item: $reportToPreview) { item in
-                                NavigationStack {
-                                    PDFPreviewView(url: item.url)
-                                        .navigationTitle("Report")
-                                        .navigationBarTitleDisplayMode(.inline)
-                                        .toolbar {
-                                            ToolbarItem(placement: .topBarTrailing) {
-                                                ShareLink(item: item.url) {
-                                                    Image(systemName: "square.and.arrow.up")
-                                                }
+                        } label: {
+                            Label("Scarica report", systemImage: "doc.text.fill")
+                        }
+                        .buttonStyle(PrimaryButtonStyle())
+                        .sheet(item: $reportToPreview) { item in
+                            NavigationStack {
+                                PDFPreviewView(url: item.url)
+                                    .navigationTitle("Report")
+                                    .navigationBarTitleDisplayMode(.inline)
+                                    .toolbar {
+                                        ToolbarItem(placement: .topBarTrailing) {
+                                            ShareLink(item: item.url) {
+                                                Image(systemName: "square.and.arrow.up")
                                             }
                                         }
-                                }
+                                    }
                             }
                         }
                     }
