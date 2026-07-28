@@ -106,108 +106,103 @@ struct ComparisonCandidateDetailSheet: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 14) {
-                    SectionCard(
-                        contentPadding: EdgeInsets(top: 14, leading: 12, bottom: 14, trailing: 12),
-                        horizontalMargin: 0
-                    ) {
-                        VStack(alignment: .leading, spacing: 12) {
-                            HStack {
-                                Text("Confronto valore")
+                VStack(alignment: .leading, spacing: 0) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack {
+                            Text("Confronto valore")
                                 .font(.headline)
-                                Spacer()
-                                Text("A \(selectedAgeOffset) anni")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-
-                            HStack(alignment: .top, spacing: 10) {
-                                vehicleColumn(
-                                    role: "CANDIDATA",
-                                    title: candidateTitle,
-                                    version: candidateVersion,
-                                    fuel: rankedCandidate.candidate.car.fuel,
-                                    engine: rankedCandidate.candidate.car.engine,
-                                    registrationYear: rankedCandidate.candidate.car.year,
-                                    comparisonYear: comparisonYear,
-                                    startingPrice: rankedCandidate.candidate.basePrice,
-                                    currentPrice: rankedCandidate.currentValue,
-                                    change: candidateValueChange,
-                                    changePercent: candidateValueChangePercentText,
-                                    accent: ColorLayout.ochre.auto,
-                                    isWinner: retentionWinner == .candidate
-                                )
-                                .frame(maxWidth: .infinity, alignment: .leading)
-
-                                VStack(spacing: 6) {
-                                    Text("VS")
-                                        .font(.caption2.weight(.black))
-                                        .foregroundColor(.secondary)
-                                        .padding(7)
-                                        .background(Color.secondary.opacity(0.12), in: Circle())
-
-                                    Rectangle()
-                                        .fill(Color.secondary.opacity(0.20))
-                                        .frame(width: 1)
-                                        .frame(maxHeight: .infinity)
-                                }
-
-                                vehicleColumn(
-                                    role: "LA TUA AUTO",
-                                    title: referenceTitle,
-                                    version: referenceVersionText,
-                                    fuel: referenceFuel,
-                                    engine: referenceEngine,
-                                    registrationYear: referenceRegistrationYear,
-                                    comparisonYear: referenceComparisonYear,
-                                    startingPrice: referenceStartingPrice,
-                                    currentPrice: referenceCurrentPrice,
-                                    change: referenceValueChange,
-                                    changePercent: referenceValueChangePercentText,
-                                    accent: ColorLayout.primary.auto,
-                                    isWinner: retentionWinner == .reference
-                                )
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-
-                            Divider()
-
-                            retentionSummary
-                        }
-                    }
-
-                    SectionCard(
-                        contentPadding: EdgeInsets(top: 14, leading: 12, bottom: 14, trailing: 12),
-                        horizontalMargin: 0
-                    ) {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Andamento a confronto")
-                                .font(.headline)
-
-                            HStack(spacing: 12) {
-                                chartLegend(title: "La tua auto", color: ColorLayout.primary.auto)
-                                chartLegend(title: "Candidata", color: ColorLayout.ochre.auto)
-                            }
-
-                            DepreciationComparisonSparkline(
-                                referencePoints: referencePoints,
-                                referenceRegistrationYear: referenceRegistrationYear,
-                                candidatePoints: rankedCandidate.candidate.data,
-                                candidateRegistrationYear: rankedCandidate.candidate.car.year,
-                                selectedAgeOffset: selectedAgeOffset,
-                                referenceColor: ColorLayout.primary.auto,
-                                candidateColor: ColorLayout.ochre.auto
-                            )
-                            .frame(height: 130)
-
-                            Text("Valori stimati alla stessa età del veicolo. I punti evidenziano l'anno selezionato.")
+                            Spacer()
+                            Text("A \(selectedAgeOffset) anni")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
+
+                        HStack(alignment: .top, spacing: 10) {
+                            vehicleColumn(
+                                role: "CANDIDATA",
+                                title: candidateTitle,
+                                version: candidateVersion,
+                                fuel: rankedCandidate.candidate.car.fuel,
+                                engine: rankedCandidate.candidate.car.engine,
+                                registrationYear: rankedCandidate.candidate.car.year,
+                                comparisonYear: comparisonYear,
+                                startingPrice: rankedCandidate.candidate.basePrice,
+                                currentPrice: rankedCandidate.currentValue,
+                                change: candidateValueChange,
+                                changePercent: candidateValueChangePercentText,
+                                accent: ColorLayout.ochre.auto,
+                                isWinner: retentionWinner == .candidate
+                            )
+                            .frame(maxWidth: .infinity, alignment: .leading)
+
+                            VStack(spacing: 6) {
+                                Text("VS")
+                                    .font(.caption2.weight(.black))
+                                    .foregroundColor(.secondary)
+                                    .padding(7)
+                                    .background(Color.secondary.opacity(0.12), in: Circle())
+
+                                Rectangle()
+                                    .fill(Color.secondary.opacity(0.20))
+                                    .frame(width: 1)
+                                    .frame(maxHeight: .infinity)
+                            }
+
+                            vehicleColumn(
+                                role: "LA TUA AUTO",
+                                title: referenceTitle,
+                                version: referenceVersionText,
+                                fuel: referenceFuel,
+                                engine: referenceEngine,
+                                registrationYear: referenceRegistrationYear,
+                                comparisonYear: referenceComparisonYear,
+                                startingPrice: referenceStartingPrice,
+                                currentPrice: referenceCurrentPrice,
+                                change: referenceValueChange,
+                                changePercent: referenceValueChangePercentText,
+                                accent: ColorLayout.primary.auto,
+                                isWinner: retentionWinner == .reference
+                            )
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
                     }
+
+                    Divider()
+                        .padding(.top, 16)
+
+                    retentionSummary
+                        .padding(.vertical, 16)
+
+                    Divider()
+
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Andamento a confronto")
+                            .font(.headline)
+
+                        HStack(spacing: 12) {
+                            chartLegend(title: "La tua auto", color: ColorLayout.primary.auto)
+                            chartLegend(title: "Candidata", color: ColorLayout.ochre.auto)
+                        }
+
+                        DepreciationComparisonSparkline(
+                            referencePoints: referencePoints,
+                            referenceRegistrationYear: referenceRegistrationYear,
+                            candidatePoints: rankedCandidate.candidate.data,
+                            candidateRegistrationYear: rankedCandidate.candidate.car.year,
+                            selectedAgeOffset: selectedAgeOffset,
+                            referenceColor: ColorLayout.primary.auto,
+                            candidateColor: ColorLayout.ochre.auto
+                        )
+                        .frame(height: 130)
+
+                        Text("Valori stimati alla stessa età del veicolo. I punti evidenziano l'anno selezionato.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.top, 16)
                 }
-                .padding(.horizontal, 6)
-                .padding(.vertical, 12)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 20)
             }
             .background(ColorLayout.cardRowBackgroud.auto.ignoresSafeArea())
             .navigationTitle("Dettaglio confronto")
@@ -266,7 +261,6 @@ struct ComparisonCandidateDetailSheet: View {
                     .foregroundColor(.secondary)
             
         }
-        .padding(10)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
