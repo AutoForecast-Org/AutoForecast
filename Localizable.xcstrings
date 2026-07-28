@@ -1654,6 +1654,9 @@
         }
       }
     },
+    "TENUTA DEL VALORE" : {
+
+    },
     "The English translation is currently work in progress and may contain minor errors. We are actively working to improve it." : {
       "localizations" : {
         "en" : {
@@ -1782,6 +1785,9 @@
           }
         }
       }
+    },
+    "Vincitore per tenuta del valore" : {
+
     },
     "Visualizza i dati" : {
       "localizations" : {

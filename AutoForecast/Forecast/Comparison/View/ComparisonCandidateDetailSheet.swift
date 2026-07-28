@@ -82,30 +82,24 @@ struct ComparisonCandidateDetailSheet: View {
         return (candidate - reference) * 100
     }
 
-    private var retentionDeltaText: String {
-        guard let delta = retentionDeltaPercentPoints else { return "-" }
-        return signedNumberText(delta, suffix: " p.p.")
-    }
-
-    private var retentionDeltaColor: Color {
-        guard let delta = retentionDeltaPercentPoints else { return .secondary }
-        if delta > 0.1 { return ColorLayout.green.auto }
-        if delta < -0.1 { return ColorLayout.red.auto }
-        return .secondary
+    private var retentionComparisonState: RetentionComparisonState {
+        guard let delta = retentionDeltaPercentPoints, delta.isFinite else {
+            return .insufficientData
+        }
+        if delta > 0.1 { return .candidateWins(deltaPercentPoints: delta) }
+        if delta < -0.1 { return .referenceWins(deltaPercentPoints: abs(delta)) }
+        return .tie
     }
 
     private var retentionWinner: RetentionWinner? {
-        guard let delta = retentionDeltaPercentPoints else { return nil }
-        if delta > 0.1 { return .candidate }
-        if delta < -0.1 { return .reference }
-        return nil
-    }
-
-    private var retentionInsightText: String {
-        guard let delta = retentionDeltaPercentPoints else { return "Non ci sono dati sufficienti per stabilire quale auto mantenga meglio il valore." }
-        if delta > 0.1 { return "La candidata mantiene meglio il valore della tua auto di riferimento." }
-        if delta < -0.1 { return "La tua auto di riferimento mantiene meglio il valore della candidata." }
-        return "Le due auto mantengono il valore in modo molto simile."
+        switch retentionComparisonState {
+        case .candidateWins:
+            return .candidate
+        case .referenceWins:
+            return .reference
+        case .tie, .insufficientData:
+            return nil
+        }
     }
 
     var body: some View {
@@ -140,7 +134,7 @@ struct ComparisonCandidateDetailSheet: View {
                                     change: candidateValueChange,
                                     changePercent: candidateValueChangePercentText,
                                     accent: ColorLayout.ochre.auto,
-                                    isRetentionWinner: retentionWinner == .candidate
+                                    isWinner: retentionWinner == .candidate
                                 )
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -170,22 +164,14 @@ struct ComparisonCandidateDetailSheet: View {
                                     change: referenceValueChange,
                                     changePercent: referenceValueChangePercentText,
                                     accent: ColorLayout.primary.auto,
-                                    isRetentionWinner: retentionWinner == .reference
+                                    isWinner: retentionWinner == .reference
                                 )
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             }
 
                             Divider()
 
-                            comparisonLine(
-                                title: "Differenza mantenimento valore",
-                                value: retentionDeltaText,
-                                valueColor: retentionDeltaColor
-                            )
-
-                            Text(retentionInsightText)
-                                .font(.caption)
-                                .foregroundColor(retentionDeltaColor)
+                            retentionSummary
                         }
                     }
 
@@ -228,17 +214,51 @@ struct ComparisonCandidateDetailSheet: View {
         }
     }
 
-    private func comparisonLine(title: String, value: String, valueColor: Color = .primary) -> some View {
-        HStack {
-            Text(title)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            Spacer()
-            Text(value)
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .foregroundColor(valueColor)
+    @ViewBuilder
+    private var retentionSummary: some View {
+        switch retentionComparisonState {
+        case .candidateWins(let delta):
+            retentionSummaryContent(
+                title: "\(candidateTitle) mantiene meglio il valore",
+                detail: "Rispetto al listino, ha una tenuta superiore di \(percentPointsText(delta)) rispetto a \(referenceTitle)."
+            )
+        case .referenceWins(let delta):
+            retentionSummaryContent(
+                title: "\(referenceTitle) mantiene meglio il valore",
+                detail: "Rispetto al listino, ha una tenuta superiore di \(percentPointsText(delta)) rispetto a \(candidateTitle)."
+            )
+        case .tie:
+            retentionSummaryContent(
+                title: "Le due auto mantengono il valore in modo simile",
+                detail: "La differenza stimata è inferiore a 0,1 punti percentuali."
+            )
+        case .insufficientData:
+            retentionSummaryContent(
+                title: "Confronto della tenuta non disponibile",
+                detail: "Servono prezzo iniziale e valore stimato validi per entrambe le auto."
+            )
         }
+    }
+
+    private func retentionSummaryContent(
+        title: String,
+        detail: String
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("TENUTA DEL VALORE")
+                .font(.caption2.weight(.bold))
+                .foregroundColor(.secondary)
+   
+                Text(title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundColor(.primary)
+                Text(detail)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            
+        }
+        .padding(10)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private func vehicleColumn(
@@ -254,7 +274,7 @@ struct ComparisonCandidateDetailSheet: View {
         change: Double,
         changePercent: String,
         accent: Color,
-        isRetentionWinner: Bool
+        isWinner: Bool
     ) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 4) {
@@ -262,11 +282,12 @@ struct ComparisonCandidateDetailSheet: View {
                     .font(.caption2.weight(.bold))
                     .foregroundColor(accent)
 
-                Image(systemName: "trophy.fill")
-                    .font(.caption2.weight(.bold))
-                    .foregroundColor(ColorLayout.green.auto)
-                    .frame(width: 12)
-                    .opacity(isRetentionWinner ? 1 : 0)
+                if isWinner {
+                    Image(systemName: "trophy.fill")
+                        .font(.caption2.weight(.bold))
+                        .foregroundColor(ColorLayout.green.auto)
+                        .accessibilityLabel("Vincitore per tenuta del valore")
+                }
             }
             Text(title)
                 .font(.subheadline.weight(.bold))
@@ -291,15 +312,15 @@ struct ComparisonCandidateDetailSheet: View {
         }
         .padding(8)
         .background {
-            if isRetentionWinner {
+            if isWinner {
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
                     .fill(ColorLayout.green.auto.opacity(0.10))
             }
         }
         .overlay {
-            if isRetentionWinner {
+            if isWinner {
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(ColorLayout.green.auto.opacity(0.45), lineWidth: 1.5)
+                    .stroke(ColorLayout.green.auto.opacity(0.45), lineWidth: 1)
             }
         }
     }
@@ -349,13 +370,24 @@ struct ComparisonCandidateDetailSheet: View {
         return signedNumberText(ratio * 100, suffix: "%")
     }
 
+    private func percentPointsText(_ value: Double) -> String {
+        "\(value.formatted(.number.precision(.fractionLength(1)))) punti percentuali"
+    }
+
     private func signedNumberText(_ value: Double, suffix: String) -> String {
         let sign = value >= 0 ? "+" : "-"
         return "\(sign)\(abs(value).formatted(.number.precision(.fractionLength(1))))\(suffix)"
     }
 }
 
-private enum RetentionWinner {
+private enum RetentionComparisonState {
+    case candidateWins(deltaPercentPoints: Double)
+    case referenceWins(deltaPercentPoints: Double)
+    case tie
+    case insufficientData
+}
+
+private enum RetentionWinner: Equatable {
     case candidate
     case reference
 }
