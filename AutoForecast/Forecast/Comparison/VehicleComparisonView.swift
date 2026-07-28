@@ -16,7 +16,6 @@ struct VehicleComparisonView: View {
     @EnvironmentObject var searchManager: SearchManager
 
     @State private var selectedAgeOffset: Int = 0
-    @State private var filters = ComparisonFilters()
     @State private var result: ComparisonResult?
     @State private var selectedCandidate: RankedCandidate?
     @State private var sortMode: ComparisonSortMode = .similarityThenPrice
@@ -62,18 +61,6 @@ struct VehicleComparisonView: View {
         }
     }
 
-    private var sameBrandCandidates: [RankedCandidate] {
-        rankedCandidates.filter {
-            $0.candidate.car.brand.caseInsensitiveCompare(referenceForecast.userCar.brand) == .orderedSame
-        }
-    }
-
-    private var otherBrandCandidates: [RankedCandidate] {
-        rankedCandidates.filter {
-            $0.candidate.car.brand.caseInsensitiveCompare(referenceForecast.userCar.brand) != .orderedSame
-        }
-    }
-
     private var mostConvenientCandidateID: UUID? {
         rankedCandidates.min {
             if $0.depreciationLoss == $1.depreciationLoss {
@@ -98,16 +85,7 @@ struct VehicleComparisonView: View {
                 introSection
                 ageSliderSection
                 sortControlSection
-                comparisonSection(
-                    "Stesso marchio",
-                    subtitle: "Ordinati per somiglianza e vicinanza prezzo",
-                    candidates: sameBrandCandidates
-                )
-                comparisonSection(
-                    "Altri marchi",
-                    subtitle: "Alternative ordinate per pertinenza",
-                    candidates: otherBrandCandidates
-                )
+                resultsSection
             }
             .padding(.vertical)
         }
@@ -115,7 +93,6 @@ struct VehicleComparisonView: View {
         .navigationTitle("Confronta con altre auto")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear(perform: recompute)
-        .onChange(of: filters) { _, _ in recompute() }
         .sheet(item: $selectedCandidate) { ranked in
             ComparisonCandidateDetailSheet(
                 rankedCandidate: ranked,
@@ -208,47 +185,71 @@ struct VehicleComparisonView: View {
         }
     }
 
-    private func comparisonSection(_ title: String, subtitle: String, candidates: [RankedCandidate]) -> some View {
+    @ViewBuilder
+    private var resultsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(title)
-                .font(.title3)
-                .fontWeight(.bold)
-                .padding(.horizontal, 8)
+            HStack(alignment: .firstTextBaseline) {
+                Text("Alternative compatibili")
+                    .font(.title3.weight(.bold))
 
-            Text(subtitle)
+                Spacer()
+
+                if result != nil {
+                    Text("\(rankedCandidates.count)")
+                        .font(.caption.weight(.bold))
+                        .foregroundColor(ColorLayout.primary.auto)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(ColorLayout.primary.auto.opacity(0.14), in: Capsule())
+                }
+            }
+            .padding(.horizontal, 8)
+
+            Text(sortMode.resultsDescription)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .padding(.horizontal, 8)
 
-            if candidates.isEmpty {
+            if result == nil {
                 SectionCard {
-                    Text("Nessun risultato coerente trovato con i filtri attuali.")
+                    HStack(spacing: 10) {
+                        ProgressView()
+                        Text("Ricerca delle alternative compatibili…")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            } else if rankedCandidates.isEmpty {
+                SectionCard {
+                    Text("Non sono state trovate alternative compatibili con alimentazione, segmento e fascia di prezzo della tua auto.")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
-            }
-
-            ForEach(Array(candidates.enumerated()), id: \.element.id) { index, ranked in
-                Button {
-                    selectedCandidate = ranked
-                } label: {
-                    ComparisonVehicleCard(
-                        title: "\(ranked.candidate.car.brand) \(ranked.candidate.car.model)",
-                        subtitle: ranked.candidate.car.version,
-                        fuel: ranked.candidate.car.fuel,
-                        engine: ranked.candidate.car.engine,
-                        year: ranked.candidate.car.year,
-                        segment: ranked.candidate.car.category,
-                        startingPrice: ranked.candidate.basePrice,
-                        currentPrice: ranked.currentValue,
-                        selectedAgeOffset: selectedAgeOffset,
-                        isReference: false,
-                        badges: badges(for: ranked),
-                        isInteractive: true,
-                        rankLabel: "#\(index + 1)"
-                    )
+            } else {
+                ForEach(Array(rankedCandidates.enumerated()), id: \.element.id) { index, ranked in
+                    Button {
+                        selectedCandidate = ranked
+                    } label: {
+                        ComparisonVehicleCard(
+                            title: "\(ranked.candidate.car.brand) \(ranked.candidate.car.model)",
+                            subtitle: ranked.candidate.car.version,
+                            fuel: ranked.candidate.car.fuel,
+                            engine: ranked.candidate.car.engine,
+                            year: ranked.candidate.car.year,
+                            segment: ranked.candidate.car.category,
+                            startingPrice: ranked.candidate.basePrice,
+                            currentPrice: ranked.currentValue,
+                            selectedAgeOffset: selectedAgeOffset,
+                            isReference: false,
+                            badges: badges(for: ranked),
+                            isInteractive: true,
+                            rankLabel: "#\(index + 1)"
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("\(ranked.candidate.car.brand) \(ranked.candidate.car.model), valore stimato \(ranked.currentValue.euroString)")
+                    .accessibilityHint("Apri il confronto dettagliato")
                 }
-                .buttonStyle(.plain)
             }
         }
     }
@@ -340,7 +341,7 @@ struct VehicleComparisonView: View {
         result = engine.generateComparison(
             referenceUserCar: referenceForecast.userCar,
             referenceBasePrice: referenceForecast.purchasePrice,
-            filters: filters
+            filters: ComparisonFilters()
         )
     }
 }

@@ -27,6 +27,16 @@
         }
       }
     },
+    "%@ %@, valore stimato %@" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@, valore stimato %3$@"
+          }
+        }
+      }
+    },
     "%@ • %lld km" : {
       "localizations" : {
         "en" : {
@@ -144,6 +154,9 @@
           }
         }
       }
+    },
+    "Alternative compatibili" : {
+
     },
     "Analizzando i dati in nostro possesso di ogni anno, abbiamo assegnato questo indice per il tuo veicolo" : {
       "localizations" : {
@@ -283,6 +296,9 @@
       }
     },
     "Apri confronto" : {
+
+    },
+    "Apri il confronto dettagliato" : {
 
     },
     "Apri un esempio" : {
@@ -1079,9 +1095,6 @@
         }
       }
     },
-    "Nessun risultato coerente trovato con i filtri attuali." : {
-
-    },
     "Nessuna selezione" : {
       "localizations" : {
         "en" : {
@@ -1091,6 +1104,9 @@
           }
         }
       }
+    },
+    "Non sono state trovate alternative compatibili con alimentazione, segmento e fascia di prezzo della tua auto." : {
+
     },
     "Non trovi il %@ che stavi cercando? Scrivici →" : {
       "localizations" : {
@@ -1360,6 +1376,9 @@
           }
         }
       }
+    },
+    "Ricerca delle alternative compatibili…" : {
+
     },
     "Ricerca già salvata" : {
       "localizations" : {

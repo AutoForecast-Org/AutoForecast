@@ -27,11 +27,22 @@ enum ComparisonSortMode: String, CaseIterable, Identifiable {
     var helperText: String {
         switch self {
         case .similarityThenPrice:
-            return "Decidi l'ordine con cui mostrare i risultati."
+            return "Prima le auto più simili per alimentazione, segmento, motore, anno e prezzo."
         case .closestPrice:
-            return "Mostra prima i modelli piu vicini al prezzo di acquisto."
+            return "Prima le auto con prezzo di listino più vicino alla tua."
         case .bestRetention:
-            return "Mostra prima i modelli con minore perdita di valore stimata."
+            return "Prima le auto con la minore svalutazione stimata."
+        }
+    }
+
+    var resultsDescription: String {
+        switch self {
+        case .similarityThenPrice:
+            return "Ordinate per compatibilità con la tua auto."
+        case .closestPrice:
+            return "Ordinate per vicinanza al prezzo di listino."
+        case .bestRetention:
+            return "Ordinate per migliore tenuta del valore stimata."
         }
     }
 }
