@@ -14,6 +14,7 @@ import SwiftUI
 struct ComparisonCandidateDetailSheet: View {
     let rankedCandidate: RankedCandidate
     let badges: [ComparisonBadge]
+    @Environment(\.dismiss) private var dismiss
     let selectedAgeOffset: Int
     let referenceTitle: String
     let referenceVersion: String?
@@ -208,9 +209,17 @@ struct ComparisonCandidateDetailSheet: View {
                 .padding(.horizontal, 6)
                 .padding(.vertical, 12)
             }
-            .background(ColorLayout.appBackround.auto.ignoresSafeArea())
+            .background(ColorLayout.cardRowBackgroud.auto.ignoresSafeArea())
             .navigationTitle("Dettaglio confronto")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Chiudi", systemImage: "xmark") {
+                        dismiss()
+                    }
+                    .accessibilityLabel("Chiudi dettaglio confronto")
+                }
+            }
         }
     }
 

@@ -130,6 +130,10 @@ struct VehicleComparisonView: View {
                 referenceCurrentPrice: referenceCurrentValue,
                 referencePoints: referenceForecast.data
             )
+            .presentationDetents([.large])
+            .presentationDragIndicator(.visible)
+            .presentationBackground(ColorLayout.cardRowBackgroud.auto)
+            .presentationCornerRadius(24)
         }
     }
 
