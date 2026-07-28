@@ -35,14 +35,22 @@ struct SectionTitle: View {
 
 struct SectionCard<Content: View>: View {
     let content: Content
+    let contentPadding: EdgeInsets
+    let horizontalMargin: CGFloat
 
-    init(@ViewBuilder content: () -> Content) {
+    init(
+        contentPadding: EdgeInsets = EdgeInsets(top: 18, leading: 18, bottom: 18, trailing: 18),
+        horizontalMargin: CGFloat = 8,
+        @ViewBuilder content: () -> Content
+    ) {
         self.content = content()
+        self.contentPadding = contentPadding
+        self.horizontalMargin = horizontalMargin
     }
 
     var body: some View {
         content
-            .padding(18)
+            .padding(contentPadding)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(
                 RoundedRectangle(cornerRadius: 24, style: .continuous)
@@ -63,7 +71,7 @@ struct SectionCard<Content: View>: View {
                     .stroke(Color.primary.opacity(0.08), lineWidth: 1)
             )
             .shadow(color: Color.black.opacity(0.06), radius: 12, x: 0, y: 4)
-            .padding(.horizontal, 8)
+            .padding(.horizontal, horizontalMargin)
     }
 }
 

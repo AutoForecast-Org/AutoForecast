@@ -94,6 +94,13 @@ struct ComparisonCandidateDetailSheet: View {
         return .secondary
     }
 
+    private var retentionWinner: RetentionWinner? {
+        guard let delta = retentionDeltaPercentPoints else { return nil }
+        if delta > 0.1 { return .candidate }
+        if delta < -0.1 { return .reference }
+        return nil
+    }
+
     private var retentionInsightText: String {
         guard let delta = retentionDeltaPercentPoints else { return "Non ci sono dati sufficienti per stabilire quale auto mantenga meglio il valore." }
         if delta > 0.1 { return "La candidata mantiene meglio il valore della tua auto di riferimento." }
@@ -105,7 +112,10 @@ struct ComparisonCandidateDetailSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 14) {
-                    SectionCard {
+                    SectionCard(
+                        contentPadding: EdgeInsets(top: 14, leading: 12, bottom: 14, trailing: 12),
+                        horizontalMargin: 0
+                    ) {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
                                 Text("Confronto valore")
@@ -129,7 +139,8 @@ struct ComparisonCandidateDetailSheet: View {
                                     currentPrice: rankedCandidate.currentValue,
                                     change: candidateValueChange,
                                     changePercent: candidateValueChangePercentText,
-                                    accent: ColorLayout.ochre.auto
+                                    accent: ColorLayout.ochre.auto,
+                                    isRetentionWinner: retentionWinner == .candidate
                                 )
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -151,17 +162,10 @@ struct ComparisonCandidateDetailSheet: View {
                                     currentPrice: referenceCurrentPrice,
                                     change: referenceValueChange,
                                     changePercent: referenceValueChangePercentText,
-                                    accent: ColorLayout.primary.auto
+                                    accent: ColorLayout.primary.auto,
+                                    isRetentionWinner: retentionWinner == .reference
                                 )
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-
-                            if !badges.isEmpty {
-                                HStack(spacing: 8) {
-                                    ForEach(badges) { badge in
-                                        BadgeChip(badge: badge)
-                                    }
-                                }
                             }
 
                             Divider()
@@ -178,7 +182,10 @@ struct ComparisonCandidateDetailSheet: View {
                         }
                     }
 
-                    SectionCard {
+                    SectionCard(
+                        contentPadding: EdgeInsets(top: 14, leading: 12, bottom: 14, trailing: 12),
+                        horizontalMargin: 0
+                    ) {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Andamento a confronto")
                                 .font(.headline)
@@ -205,7 +212,7 @@ struct ComparisonCandidateDetailSheet: View {
                         }
                     }
                 }
-                .padding(.horizontal, 10)
+                .padding(.horizontal, 6)
                 .padding(.vertical, 12)
             }
             .background(ColorLayout.appBackround.auto.ignoresSafeArea())
@@ -239,12 +246,21 @@ struct ComparisonCandidateDetailSheet: View {
         currentPrice: Double,
         change: Double,
         changePercent: String,
-        accent: Color
+        accent: Color,
+        isRetentionWinner: Bool
     ) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(role)
-                .font(.caption2.weight(.bold))
-                .foregroundColor(accent)
+            HStack(spacing: 4) {
+                Text(role)
+                    .font(.caption2.weight(.bold))
+                    .foregroundColor(accent)
+
+                Image(systemName: "trophy.fill")
+                    .font(.caption2.weight(.bold))
+                    .foregroundColor(ColorLayout.green.auto)
+                    .frame(width: 12)
+                    .opacity(isRetentionWinner ? 1 : 0)
+            }
             Text(title)
                 .font(.subheadline.weight(.bold))
                 .lineLimit(2)
@@ -265,6 +281,19 @@ struct ComparisonCandidateDetailSheet: View {
             compactMetric(title: "Valore stimato", value: currentPrice.euroString, valueColor: accent)
             compactMetric(title: "% svalutazione", value: changePercent, valueColor: valueChangeColor(change))
             compactMetric(title: "Scostamento dal listino", value: change.signedEuroString, valueColor: valueChangeColor(change))
+        }
+        .padding(8)
+        .background {
+            if isRetentionWinner {
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(ColorLayout.green.auto.opacity(0.10))
+            }
+        }
+        .overlay {
+            if isRetentionWinner {
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(ColorLayout.green.auto.opacity(0.45), lineWidth: 1.5)
+            }
         }
     }
 
@@ -317,4 +346,9 @@ struct ComparisonCandidateDetailSheet: View {
         let sign = value >= 0 ? "+" : "-"
         return "\(sign)\(abs(value).formatted(.number.precision(.fractionLength(1))))\(suffix)"
     }
+}
+
+private enum RetentionWinner {
+    case candidate
+    case reference
 }
