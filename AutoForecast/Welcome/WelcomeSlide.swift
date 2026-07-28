@@ -23,10 +23,10 @@ struct WelcomeSlide: Identifiable {
 
 let slides = [
     WelcomeSlide(
-        imageName: "Placeholder",
+        imageName: "Welcome1",
         systemImage: "car.front.waves.up",
-        title: "Benvenuto in AutoForecast",
-        description: "Stimiamo il valore attuale e futuro della tua auto per aiutarti a scegliere quando vendere, tenere o confrontare il veicolo.",
+        title: "Benvenuto in Auto Forecast",
+        description: "Stimiamo il valore futuro della tua auto per aiutarti a scegliere se venderla, tenerla o confrontarla con modelli simili.",
         highlights: [
             "Analisi guidata in pochi passaggi",
             "Valutazione in euro anno per anno",
@@ -35,36 +35,36 @@ let slides = [
         footerNote: "Le stime sono indicative e si aggiornano in base ai dati inseriti."
     ),
     WelcomeSlide(
-        imageName: "Placeholder",
+        imageName: "Welcome2",
         systemImage: "chart.line.uptrend.xyaxis",
         title: "Come funziona la previsione",
         description: "L'algoritmo combina anno, km, alimentazione, manutenzione e altri parametri per calcolare la curva di svalutazione del tuo veicolo.",
         highlights: [
-            "Scenario centrale, ottimistico e pessimista",
+            "Scenario corrente, ottimistico e pessimista",
             "Focus su valore odierno e anno selezionato",
             "Scostamento percentuale dal prezzo di listino"
         ],
         footerNote: nil
     ),
     WelcomeSlide(
-        imageName: "Placeholder",
+        imageName: "Welcome3",
         systemImage: "arrow.left.arrow.right",
         title: "Confronta e salva nel Garage",
         description: "Confronta auto simili per capire quale svaluta meno nel tempo e salva le ricerche importanti nel tuo Garage personale.",
         highlights: [
             "Confronto diretto tra modelli simili",
-            "Dettaglio perdita in percentuale",
+            "Percentuale di svalutazion",
             "Recupero rapido delle ricerche salvate"
         ],
         footerNote: "Puoi sempre modificare i parametri e rigenerare la previsione."
     ),
     WelcomeSlide(
-        imageName: "Placeholder",
+        imageName: "Welcome4",
         systemImage: "flag.checkered.2.crossed",
         title: "Pronto a iniziare",
         description: "Inserisci i dati della tua auto e scopri subito la previsione completa con grafico, sintesi e suggerimenti operativi.",
         highlights: [
-            "Prima analisi in meno di un minuto",
+            "Prima analisi in pochi minuti",
             "Report di esempio sempre disponibile",
             "Esperienza pensata per decisioni veloci"
         ],
