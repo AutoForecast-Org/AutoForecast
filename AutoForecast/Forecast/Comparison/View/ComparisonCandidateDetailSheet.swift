@@ -144,11 +144,18 @@ struct ComparisonCandidateDetailSheet: View {
                                 )
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                                Text("VS")
-                                    .font(.caption2.weight(.black))
-                                    .foregroundColor(.secondary)
-                                    .padding(7)
-                                    .background(Color.secondary.opacity(0.12), in: Circle())
+                                VStack(spacing: 6) {
+                                    Text("VS")
+                                        .font(.caption2.weight(.black))
+                                        .foregroundColor(.secondary)
+                                        .padding(7)
+                                        .background(Color.secondary.opacity(0.12), in: Circle())
+
+                                    Rectangle()
+                                        .fill(Color.secondary.opacity(0.20))
+                                        .frame(width: 1)
+                                        .frame(maxHeight: .infinity)
+                                }
 
                                 vehicleColumn(
                                     role: "LA TUA AUTO",
