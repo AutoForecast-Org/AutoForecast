@@ -19,6 +19,7 @@ struct VehicleComparisonView: View {
     @State private var result: ComparisonResult?
     @State private var selectedCandidate: RankedCandidate?
     @State private var sortMode: ComparisonSortMode = .similarityThenPrice
+    @State private var isReferenceCardExpanded = false
 
     private var engine: DepreciationEngine { DepreciationEngine(searchManager: searchManager) }
 
@@ -83,8 +84,7 @@ struct VehicleComparisonView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 introSection
-                ageSliderSection
-                sortControlSection
+                comparisonControls
                 resultsSection
             }
             .padding(.vertical)
@@ -114,26 +114,6 @@ struct VehicleComparisonView: View {
         }
     }
 
-    private var sortControlSection: some View {
-        SectionCard {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Ordinamento risultati")
-                    .font(.headline)
-
-                Picker("Ordinamento", selection: $sortMode) {
-                    ForEach(ComparisonSortMode.allCases) { mode in
-                        Text(mode.label).tag(mode)
-                    }
-                }
-                .pickerStyle(.segmented)
-
-                Text(sortMode.helperText)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-        }
-    }
-
     private var introSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             VStack(alignment: .leading, spacing: 8) {
@@ -159,13 +139,14 @@ struct VehicleComparisonView: View {
                 isReference: true,
                 badges: [],
                 isInteractive: false,
-                rankLabel: nil
+                rankLabel: nil,
+                referenceExpansion: $isReferenceCardExpanded
             )
         }
     }
 
-    private var ageSliderSection: some View {
-        SectionCard {
+    private var comparisonControls: some View {
+        VStack(alignment: .leading, spacing: 16) {
             VStack(alignment: .leading, spacing: 12) {
                 Text("Anni dall'immatricolazione: \(selectedAgeOffset)")
                     .font(.headline)
@@ -177,12 +158,35 @@ struct VehicleComparisonView: View {
                     ),
                     in: 0...20, step: 1
                 )
+                .accessibilityLabel("Anni dall'immatricolazione")
+                .accessibilityValue("\(selectedAgeOffset) anni")
+                .accessibilityHint("Regola l'età usata per stimare e confrontare i valori")
 
                 Text("Aggiorna il confronto al valore stimato dopo \(selectedAgeOffset) anni.")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
+
+            Divider()
+
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Ordinamento risultati")
+                    .font(.headline)
+
+                Picker("Ordinamento", selection: $sortMode) {
+                    ForEach(ComparisonSortMode.allCases) { mode in
+                        Text(mode.label).tag(mode)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .accessibilityHint(sortMode.helperText)
+
+                Text(sortMode.helperText)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
         }
+        .padding(.horizontal, 16)
     }
 
     @ViewBuilder
@@ -243,7 +247,8 @@ struct VehicleComparisonView: View {
                             isReference: false,
                             badges: badges(for: ranked),
                             isInteractive: true,
-                            rankLabel: "#\(index + 1)"
+                            rankLabel: "#\(index + 1)",
+                            referenceExpansion: nil
                         )
                     }
                     .buttonStyle(.plain)

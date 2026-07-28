@@ -25,6 +25,7 @@ struct ComparisonVehicleCard: View {
     let badges: [ComparisonBadge]
     let isInteractive: Bool
     let rankLabel: String?
+    let referenceExpansion: Binding<Bool>?
 
     private var variation: Double {
         guard startingPrice > 0 else { return 0 }
@@ -42,69 +43,110 @@ struct ComparisonVehicleCard: View {
         return subtitle
     }
 
+    private var isCollapsible: Bool {
+        isReference && referenceExpansion != nil
+    }
+
+    private var isExpanded: Bool {
+        guard isCollapsible, let referenceExpansion else { return true }
+        return referenceExpansion.wrappedValue
+    }
+
     var body: some View {
         SectionCard {
             VStack(alignment: .leading, spacing: 12) {
-                HStack(alignment: .top, spacing: 8) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        if let rankLabel, !isReference {
-                            Text(rankLabel)
-                                .font(.caption2)
-                                .fontWeight(.bold)
-                                .foregroundColor(ColorLayout.primary.auto)
-                        }
-                        Text(title)
-                            .font(.headline)
-                        Text(resolvedSubtitle)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                if isCollapsible, let referenceExpansion {
+                    Button {
+                        referenceExpansion.wrappedValue.toggle()
+                    } label: {
+                        vehicleHeader
                     }
-
-                    Spacer(minLength: 8)
-
-                    if isReference {
-                        Text("Auto corrente")
-                            .font(.caption2)
-                            .fontWeight(.semibold)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(ColorLayout.primary.auto.opacity(0.16))
-                            .foregroundColor(ColorLayout.primary.auto)
-                            .clipShape(Capsule())
-                    } else if isInteractive {
-                        Image(systemName: "chevron.right")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Auto di riferimento, \(title), \(resolvedSubtitle)")
+                    .accessibilityValue(isExpanded ? "Espansa" : "Compressa")
+                    .accessibilityHint(isExpanded ? "Doppio tocco per comprimere i dettagli" : "Doppio tocco per espandere i dettagli")
+                } else {
+                    vehicleHeader
                 }
 
-                if !badges.isEmpty {
-                    HStack(spacing: 8) {
-                        ForEach(badges) { badge in
-                            BadgeChip(badge: badge)
-                        }
-                    }
+                if isExpanded {
+                    vehicleDetails
                 }
+            }
+        }
+    }
 
+    private var vehicleHeader: some View {
+        HStack(alignment: .top, spacing: 8) {
+            VStack(alignment: .leading, spacing: 4) {
+                if let rankLabel, !isReference {
+                    Text(rankLabel)
+                        .font(.caption2)
+                        .fontWeight(.bold)
+                        .foregroundColor(ColorLayout.primary.auto)
+                }
+                Text(title)
+                    .font(.headline)
+                Text(resolvedSubtitle)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+
+            Spacer(minLength: 8)
+
+            if isReference {
+                Text("Auto corrente")
+                    .font(.caption2)
+                    .fontWeight(.semibold)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(ColorLayout.primary.auto.opacity(0.16))
+                    .foregroundColor(ColorLayout.primary.auto)
+                    .clipShape(Capsule())
+            }
+
+            if isCollapsible {
+                Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(.secondary)
+                    .accessibilityHidden(true)
+            } else if isInteractive {
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .accessibilityHidden(true)
+            }
+        }
+    }
+
+    private var vehicleDetails: some View {
+        Group {
+            if !badges.isEmpty {
                 HStack(spacing: 8) {
-                    DetailChip(label: fuel ?? "N/D", icon: "fuelpump.fill")
-                    DetailChip(label: engine, icon: "gearshape.2.fill")
+                    ForEach(badges) { badge in
+                        BadgeChip(badge: badge)
+                    }
                 }
+            }
 
-                HStack(spacing: 8) {
-                    DetailChip(label: "\(year)", icon: "calendar")
-                    DetailChip(label: segment ?? "Segmento N/D", icon: "square.grid.2x2")
-                }
+            HStack(spacing: 8) {
+                DetailChip(label: fuel ?? "N/D", icon: "fuelpump.fill")
+                DetailChip(label: engine, icon: "gearshape.2.fill")
+            }
 
-                HStack(spacing: 10) {
-                    MetricBox(title: "Listino", value: startingPrice.euroString)
-                    MetricBox(title: "Valore (\(selectedAgeOffset)a)", value: currentPrice.euroString)
-                    MetricBox(
-                        title: "Variazione",
-                        value: variation.percentString,
-                        tint: variationColor
-                    )
-                }
+            HStack(spacing: 8) {
+                DetailChip(label: "\(year)", icon: "calendar")
+                DetailChip(label: segment ?? "Segmento N/D", icon: "square.grid.2x2")
+            }
+
+            HStack(spacing: 10) {
+                MetricBox(title: "Listino", value: startingPrice.euroString)
+                MetricBox(title: "Valore (\(selectedAgeOffset)a)", value: currentPrice.euroString)
+                MetricBox(
+                    title: "Variazione",
+                    value: variation.percentString,
+                    tint: variationColor
+                )
             }
         }
     }

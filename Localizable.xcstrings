@@ -73,6 +73,9 @@
         }
       }
     },
+    "%lld anni" : {
+
+    },
     "%lld auto salvate" : {
 
     },
@@ -205,6 +208,9 @@
         }
       }
     },
+    "Anni dall'immatricolazione" : {
+
+    },
     "Anni dall'immatricolazione: %lld" : {
 
     },
@@ -329,6 +335,16 @@
     },
     "Auto di riferimento" : {
 
+    },
+    "Auto di riferimento, %@, %@" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto di riferimento, %1$@, %2$@"
+          }
+        }
+      }
     },
     "Automatico" : {
       "localizations" : {
@@ -495,6 +511,9 @@
         }
       }
     },
+    "Compressa" : {
+
+    },
     "Confronta con altre auto" : {
 
     },
@@ -562,6 +581,12 @@
     "Dopo la prima valutazione, potrai salvare la tua auto e trovarla qui nel tuo garage. Nel frattempo, esplora un esempio completo." : {
 
     },
+    "Doppio tocco per comprimere i dettagli" : {
+
+    },
+    "Doppio tocco per espandere i dettagli" : {
+
+    },
     "Elaboro dati" : {
       "localizations" : {
         "en" : {
@@ -581,6 +606,9 @@
           }
         }
       }
+    },
+    "Espansa" : {
+
     },
     "Esplora la valutazione del tuo veicolo anno per anno tramite una tabella semplice e immediata, pensata per rendere la lettura dei dati più chiara." : {
       "localizations" : {
@@ -1366,6 +1394,9 @@
           }
         }
       }
+    },
+    "Regola l'età usata per stimare e confrontare i valori" : {
+
     },
     "Report" : {
       "localizations" : {
