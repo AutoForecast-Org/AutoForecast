@@ -109,7 +109,7 @@ struct ComparisonCandidateDetailSheet: View {
                 VStack(alignment: .leading, spacing: 0) {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
-                            Text("Confronto valore")
+                            Text("Confronto")
                                 .font(.headline)
                             Spacer()
                             Text("A \(selectedAgeOffset) anni")
@@ -119,7 +119,7 @@ struct ComparisonCandidateDetailSheet: View {
 
                         HStack(alignment: .top, spacing: 10) {
                             vehicleColumn(
-                                role: "CANDIDATA",
+                                role: "COMPETITOR",
                                 title: candidateTitle,
                                 version: candidateVersion,
                                 fuel: rankedCandidate.candidate.car.fuel,
@@ -181,7 +181,7 @@ struct ComparisonCandidateDetailSheet: View {
 
                         HStack(spacing: 12) {
                             chartLegend(title: "La tua auto", color: ColorLayout.primary.auto)
-                            chartLegend(title: "Candidata", color: ColorLayout.ochre.auto)
+                            chartLegend(title: "Competitor", color: ColorLayout.ochre.auto)
                         }
 
                         DepreciationComparisonSparkline(
@@ -205,7 +205,7 @@ struct ComparisonCandidateDetailSheet: View {
                 .padding(.vertical, 20)
             }
             .background(ColorLayout.cardRowBackgroud.auto.ignoresSafeArea())
-            .navigationTitle("Dettaglio confronto")
+            .navigationTitle("Dettaglio")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
