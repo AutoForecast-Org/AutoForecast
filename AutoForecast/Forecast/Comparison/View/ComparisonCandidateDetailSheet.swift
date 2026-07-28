@@ -16,8 +16,13 @@ struct ComparisonCandidateDetailSheet: View {
     let badges: [ComparisonBadge]
     let selectedAgeOffset: Int
     let referenceTitle: String
+    let referenceVersion: String?
+    let referenceFuel: String?
+    let referenceEngine: String
+    let referenceRegistrationYear: Int
     let referenceStartingPrice: Double
     let referenceCurrentPrice: Double
+    let referencePoints: [DepreciationPoint]
 
     private var candidateTitle: String {
         "\(rankedCandidate.candidate.car.brand) \(rankedCandidate.candidate.car.model)"
@@ -28,88 +33,128 @@ struct ComparisonCandidateDetailSheet: View {
         return raw.isEmpty ? "Versione non disponibile" : raw
     }
 
-    private var candidateLoss: Double {
-        rankedCandidate.depreciationLoss
+    private var referenceVersionText: String {
+        let raw = (referenceVersion ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        return raw.isEmpty ? "Versione non disponibile" : raw
     }
 
-    private var candidateLossRatio: Double? {
+    private var candidateValueChange: Double {
+        rankedCandidate.currentValue - rankedCandidate.candidate.basePrice
+    }
+
+    private var candidateValueChangeRatio: Double? {
         let startingPrice = rankedCandidate.candidate.basePrice
         guard startingPrice > 0 else { return nil }
-        return max(candidateLoss / startingPrice, 0)
+        return candidateValueChange / startingPrice
     }
 
-    private var candidateLossPercentText: String {
-        guard let ratio = candidateLossRatio else { return "-" }
-        return ratio.formatted(.percent.precision(.fractionLength(1)))
+    private var candidateValueChangePercentText: String {
+        signedPercentText(candidateValueChangeRatio)
     }
 
     private var comparisonYear: Int {
         rankedCandidate.candidate.car.year + selectedAgeOffset
     }
 
-    private var valueLabelText: String {
-        "Valore \(comparisonYear)"
-    }
-
     private var comparisonYearText: String {
         String(comparisonYear)
     }
 
-    private var referenceLoss: Double {
-        max(referenceStartingPrice - referenceCurrentPrice, 0)
+    private var referenceComparisonYear: Int {
+        referenceRegistrationYear + selectedAgeOffset
     }
 
-    private var referenceLossRatio: Double? {
+    private var referenceValueChange: Double {
+        referenceCurrentPrice - referenceStartingPrice
+    }
+
+    private var referenceValueChangeRatio: Double? {
         guard referenceStartingPrice > 0 else { return nil }
-        return max(referenceLoss / referenceStartingPrice, 0)
+        return referenceValueChange / referenceStartingPrice
     }
 
-    private var referenceLossPercentText: String {
-        guard let ratio = referenceLossRatio else { return "-" }
-        return ratio.formatted(.percent.precision(.fractionLength(1)))
+    private var referenceValueChangePercentText: String {
+        signedPercentText(referenceValueChangeRatio)
     }
 
-    private var depreciationDeltaPercentPoints: Double? {
-        guard let candidate = candidateLossRatio, let reference = referenceLossRatio else { return nil }
+    private var retentionDeltaPercentPoints: Double? {
+        guard let candidate = candidateValueChangeRatio, let reference = referenceValueChangeRatio else { return nil }
         return (candidate - reference) * 100
     }
 
-    private var depreciationDeltaText: String {
-        guard let delta = depreciationDeltaPercentPoints else { return "-" }
-        let sign = delta > 0 ? "+" : ""
-        return "\(sign)\(delta.formatted(.number.precision(.fractionLength(1)))) p.p."
+    private var retentionDeltaText: String {
+        guard let delta = retentionDeltaPercentPoints else { return "-" }
+        return signedNumberText(delta, suffix: " p.p.")
     }
 
-    private var depreciationDeltaColor: Color {
-        guard let delta = depreciationDeltaPercentPoints else { return .secondary }
-        if delta > 0.1 { return ColorLayout.red.auto }
-        if delta < -0.1 { return ColorLayout.green.auto }
+    private var retentionDeltaColor: Color {
+        guard let delta = retentionDeltaPercentPoints else { return .secondary }
+        if delta > 0.1 { return ColorLayout.green.auto }
+        if delta < -0.1 { return ColorLayout.red.auto }
         return .secondary
     }
 
-    private var depreciationInsightText: String {
-        guard let delta = depreciationDeltaPercentPoints else { return "Confronto non disponibile" }
-        if delta > 0.1 { return "Questa auto svaluta piu della tua auto di riferimento." }
-        if delta < -0.1 { return "Questa auto svaluta meno della tua auto di riferimento." }
-        return "Svalutazione in linea con la tua auto di riferimento."
+    private var retentionInsightText: String {
+        guard let delta = retentionDeltaPercentPoints else { return "Non ci sono dati sufficienti per stabilire quale auto mantenga meglio il valore." }
+        if delta > 0.1 { return "La candidata mantiene meglio il valore della tua auto di riferimento." }
+        if delta < -0.1 { return "La tua auto di riferimento mantiene meglio il valore della candidata." }
+        return "Le due auto mantengono il valore in modo molto simile."
     }
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 14) {
                     SectionCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text(candidateTitle)
-                                .font(.title3)
-                                .fontWeight(.bold)
-                            Text(candidateVersion)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                            HStack {
+                                Text("Confronto valore")
+                                .font(.headline)
+                                Spacer()
+                                Text("A \(selectedAgeOffset) anni")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
 
-                            Text("Anno di riferimento: \(comparisonYearText) (eta veicolo: \(selectedAgeOffset) anni)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                            HStack(alignment: .top, spacing: 10) {
+                                vehicleColumn(
+                                    role: "CANDIDATA",
+                                    title: candidateTitle,
+                                    version: candidateVersion,
+                                    fuel: rankedCandidate.candidate.car.fuel,
+                                    engine: rankedCandidate.candidate.car.engine,
+                                    registrationYear: rankedCandidate.candidate.car.year,
+                                    comparisonYear: comparisonYear,
+                                    startingPrice: rankedCandidate.candidate.basePrice,
+                                    currentPrice: rankedCandidate.currentValue,
+                                    change: candidateValueChange,
+                                    changePercent: candidateValueChangePercentText,
+                                    accent: ColorLayout.ochre.auto
+                                )
+                                .frame(maxWidth: .infinity, alignment: .leading)
+
+                                Text("VS")
+                                    .font(.caption2.weight(.black))
+                                    .foregroundColor(.secondary)
+                                    .padding(7)
+                                    .background(Color.secondary.opacity(0.12), in: Circle())
+
+                                vehicleColumn(
+                                    role: "LA TUA AUTO",
+                                    title: referenceTitle,
+                                    version: referenceVersionText,
+                                    fuel: referenceFuel,
+                                    engine: referenceEngine,
+                                    registrationYear: referenceRegistrationYear,
+                                    comparisonYear: referenceComparisonYear,
+                                    startingPrice: referenceStartingPrice,
+                                    currentPrice: referenceCurrentPrice,
+                                    change: referenceValueChange,
+                                    changePercent: referenceValueChangePercentText,
+                                    accent: ColorLayout.primary.auto
+                                )
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            }
 
                             if !badges.isEmpty {
                                 HStack(spacing: 8) {
@@ -121,90 +166,47 @@ struct ComparisonCandidateDetailSheet: View {
 
                             Divider()
 
-                            HStack(spacing: 10) {
-                                MetricBox(title: "Listino", value: rankedCandidate.candidate.basePrice.euroString)
-                                MetricBox(title: valueLabelText, value: rankedCandidate.currentValue.euroString)
-                                MetricBox(title: "Perdita", value: candidateLossPercentText, tint: ColorLayout.red.auto)
-                            }
-                        }
-                    }
-
-                    SectionCard {
-                        VStack(alignment: .leading, spacing: 12) {
-                            Text("Confronto svalutazione")
-                                .font(.headline)
-                            
-                            Text(referenceTitle)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                                .lineLimit(2)
-
-                            HStack(alignment: .top, spacing: 10) {
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text("Candidata")
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                    comparisonLine(
-                                        title: "% svalutazione",
-                                        value: candidateLossPercentText
-                                    )
-                                    comparisonLine(
-                                        title: "Perdita",
-                                        value: candidateLoss.euroString
-                                    )
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text("Riferimento")
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-
-                                    comparisonLine(
-                                        title: "% svalutazione",
-                                        value: referenceLossPercentText
-                                    )
-                                    comparisonLine(
-                                        title: "Perdita",
-                                        value: referenceLoss.euroString
-                                    )
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-
-                            Divider()
-
                             comparisonLine(
-                                title: "Differenza",
-                                value: depreciationDeltaText,
-                                valueColor: depreciationDeltaColor
+                                title: "Differenza mantenimento valore",
+                                value: retentionDeltaText,
+                                valueColor: retentionDeltaColor
                             )
 
-                            Text(depreciationInsightText)
+                            Text(retentionInsightText)
                                 .font(.caption)
-                                .foregroundColor(depreciationDeltaColor)
+                                .foregroundColor(retentionDeltaColor)
                         }
                     }
 
                     SectionCard {
                         VStack(alignment: .leading, spacing: 10) {
-                            Text("Curva svalutazione")
+                            Text("Andamento a confronto")
                                 .font(.headline)
 
-                            DepreciationSparkline(
-                                points: rankedCandidate.candidate.data,
-                                selectedAgeOffset: selectedAgeOffset,
-                                registrationYear: rankedCandidate.candidate.car.year
-                            )
-                            .frame(height: 70)
+                            HStack(spacing: 12) {
+                                chartLegend(title: "La tua auto", color: ColorLayout.primary.auto)
+                                chartLegend(title: "Candidata", color: ColorLayout.ochre.auto)
+                            }
 
-                            Text("Indicatore rapido: andamento storico del valore stimato.")
+                            DepreciationComparisonSparkline(
+                                referencePoints: referencePoints,
+                                referenceRegistrationYear: referenceRegistrationYear,
+                                candidatePoints: rankedCandidate.candidate.data,
+                                candidateRegistrationYear: rankedCandidate.candidate.car.year,
+                                selectedAgeOffset: selectedAgeOffset,
+                                referenceColor: ColorLayout.primary.auto,
+                                candidateColor: ColorLayout.ochre.auto
+                            )
+                            .frame(height: 130)
+
+                            Text("Valori stimati alla stessa età del veicolo. I punti evidenziano l'anno selezionato.")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
                     }
                 }
-                .padding(16)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 12)
             }
             .background(ColorLayout.appBackround.auto.ignoresSafeArea())
             .navigationTitle("Dettaglio confronto")
@@ -223,5 +225,96 @@ struct ComparisonCandidateDetailSheet: View {
                 .fontWeight(.semibold)
                 .foregroundColor(valueColor)
         }
+    }
+
+    private func vehicleColumn(
+        role: String,
+        title: String,
+        version: String,
+        fuel: String?,
+        engine: String,
+        registrationYear: Int,
+        comparisonYear: Int,
+        startingPrice: Double,
+        currentPrice: Double,
+        change: Double,
+        changePercent: String,
+        accent: Color
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(role)
+                .font(.caption2.weight(.bold))
+                .foregroundColor(accent)
+            Text(title)
+                .font(.subheadline.weight(.bold))
+                .lineLimit(2)
+                .minimumScaleFactor(0.85)
+            Text(version)
+                .font(.caption2)
+                .foregroundColor(.secondary)
+                .lineLimit(2)
+
+            vehicleSpecification(icon: "fuelpump.fill", value: fuel, fallback: "Alimentazione N/D")
+            vehicleSpecification(icon: "gearshape.2.fill", value: engine, fallback: "Motore N/D")
+
+            Text("\(registrationYear) → \(comparisonYear)")
+                .font(.caption2)
+                .foregroundColor(.secondary)
+
+            compactMetric(title: "Listino", value: startingPrice.euroString)
+            compactMetric(title: "Valore stimato", value: currentPrice.euroString, valueColor: accent)
+            compactMetric(title: "% svalutazione", value: changePercent, valueColor: valueChangeColor(change))
+            compactMetric(title: "Scostamento dal listino", value: change.signedEuroString, valueColor: valueChangeColor(change))
+        }
+    }
+
+    private func vehicleSpecification(icon: String, value: String?, fallback: String) -> some View {
+        let text = value?.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        return Label(text?.isEmpty == false ? text! : fallback, systemImage: icon)
+            .font(.caption2)
+            .foregroundColor(.secondary)
+            .lineLimit(2)
+    }
+
+    private func compactMetric(title: String, value: String, valueColor: Color = .primary) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(title)
+                .font(.caption2)
+                .foregroundColor(.secondary)
+                .lineLimit(1)
+            Text(value)
+                .font(.caption.weight(.semibold))
+                .foregroundColor(valueColor)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+        }
+    }
+
+    private func chartLegend(title: String, color: Color) -> some View {
+        HStack(spacing: 5) {
+            Circle()
+                .fill(color)
+                .frame(width: 8, height: 8)
+            Text(title)
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+    }
+
+    private func valueChangeColor(_ change: Double) -> Color {
+        if change > 0.01 { return ColorLayout.green.auto }
+        if change < -0.01 { return ColorLayout.red.auto }
+        return .secondary
+    }
+
+    private func signedPercentText(_ ratio: Double?) -> String {
+        guard let ratio else { return "-" }
+        return signedNumberText(ratio * 100, suffix: "%")
+    }
+
+    private func signedNumberText(_ value: Double, suffix: String) -> String {
+        let sign = value >= 0 ? "+" : "-"
+        return "\(sign)\(abs(value).formatted(.number.precision(.fractionLength(1))))\(suffix)"
     }
 }

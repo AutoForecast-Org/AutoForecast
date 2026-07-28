@@ -53,6 +53,16 @@
         }
       }
     },
+    "%lld → %lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld → %2$lld"
+          }
+        }
+      }
+    },
     "%lld auto salvate" : {
 
     },
@@ -97,6 +107,9 @@
       }
     },
     "1 auto salvata" : {
+
+    },
+    "A %lld anni" : {
 
     },
     "Abbiamo analizzato i dati a nostra disposizione e abbiamo calcolato un'intervallo di valori tra cui potrebbe trovarsi la tua auto. Ricorda che le cifre potrebbero variare a seconda di fattori esterni quali le condizioni generali del veicolo, i chilometri percorsi e altre caratteristiche." : {
@@ -166,6 +179,9 @@
         }
       }
     },
+    "Andamento a confronto" : {
+
+    },
     "Andamento del valore" : {
       "localizations" : {
         "en" : {
@@ -215,16 +231,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "First registration year"
-          }
-        }
-      }
-    },
-    "Anno di riferimento: %@ (eta veicolo: %lld anni)" : {
-      "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Anno di riferimento: %1$@ (eta veicolo: %2$lld anni)"
           }
         }
       }
@@ -384,9 +390,6 @@
         }
       }
     },
-    "Candidata" : {
-
-    },
     "Caricamento dati..." : {
 
     },
@@ -485,10 +488,7 @@
     "Confronto del valore stimato anno per anno" : {
 
     },
-    "Confronto svalutazione" : {
-
-    },
-    "Curva svalutazione" : {
+    "Confronto valore" : {
 
     },
     "Dati" : {
@@ -510,6 +510,9 @@
           }
         }
       }
+    },
+    "Dati insufficienti per il confronto" : {
+
     },
     "Dati ottimistici" : {
       "localizations" : {
@@ -740,9 +743,6 @@
           }
         }
       }
-    },
-    "Indicatore rapido: andamento storico del valore stimato." : {
-
     },
     "Informazioni sull'applicazione" : {
       "localizations" : {
@@ -1378,9 +1378,6 @@
         }
       }
     },
-    "Riferimento" : {
-
-    },
     "Salta" : {
 
     },
@@ -1773,6 +1770,9 @@
     "Valori aggiornati in base alla previsione selezionata." : {
 
     },
+    "Valori stimati alla stessa età del veicolo. I punti evidenziano l'anno selezionato." : {
+
+    },
     "Versione" : {
       "localizations" : {
         "en" : {
@@ -1792,6 +1792,9 @@
           }
         }
       }
+    },
+    "VS" : {
+
     },
     "Zona" : {
       "localizations" : {

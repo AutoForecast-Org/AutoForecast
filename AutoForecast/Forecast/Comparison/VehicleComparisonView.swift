@@ -122,8 +122,13 @@ struct VehicleComparisonView: View {
                 badges: badges(for: ranked),
                 selectedAgeOffset: selectedAgeOffset,
                 referenceTitle: "\(referenceForecast.userCar.brand) \(referenceForecast.userCar.model)",
+                referenceVersion: referenceForecast.userCar.version,
+                referenceFuel: referenceResolvedCar?.fuel,
+                referenceEngine: referenceResolvedCar?.engine ?? referenceForecast.userCar.engine,
+                referenceRegistrationYear: referenceForecast.userCar.registrationYear,
                 referenceStartingPrice: referenceForecast.purchasePrice,
-                referenceCurrentPrice: referenceCurrentValue
+                referenceCurrentPrice: referenceCurrentValue,
+                referencePoints: referenceForecast.data
             )
         }
     }
