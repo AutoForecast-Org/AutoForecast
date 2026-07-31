@@ -65,7 +65,7 @@ struct HomeView: View {
                 }
             }
         }
-        .background(ColorLayout.primary.auto)
+        .background(ColorLayout.appBackround.auto)
         .navigationBarHidden(true)
         .overlay(alignment: .topTrailing) {
             Button {
@@ -75,7 +75,7 @@ struct HomeView: View {
                     .font(.title2)
                     .foregroundStyle(ColorLayout.white.auto)
                     .padding(12)
-                    .background(.ultraThinMaterial, in: Circle())
+                    .background(ColorLayout.primary.auto, in: Circle())
             }
             .accessibilityLabel("Apri profilo utente")
             .padding(.top, 12)
@@ -212,7 +212,7 @@ public struct HomeHeroMarkView: View {
 //private struct HomeEvaluationButtonView: View {
 //    var isEnabled: Bool
 //    @Environment(\.navigate) private var navigate
-//    
+//
 //    var body: some View {
 //        Button {
 //            navigate.append(.parametersView)
