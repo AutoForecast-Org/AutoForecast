@@ -12,15 +12,23 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @EnvironmentObject private var authStore: AuthStore
     
     var body: some View {
         TabView {
             // 1. HOME
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
+            Group {
+                if authStore.isLoading {
+                    ProgressView("Verifica accesso…")
+                } else if authStore.isAuthenticated {
+                    HomeView()
+                } else {
+                    AuthView()
                 }
-            
+            }
+            .tabItem {
+                Label("Home", systemImage: "house.fill")
+            }
             // 2. PREFERITI
             FavouritesView()
                 .tabItem {

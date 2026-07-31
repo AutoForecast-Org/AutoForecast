@@ -14,6 +14,8 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject var searchManager: SearchManager
+    @EnvironmentObject private var authStore: AuthStore
+    @State private var isProfilePresented = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -63,8 +65,26 @@ struct HomeView: View {
                 }
             }
         }
-        .background(ColorLayout.appBackround.auto)
+        .background(ColorLayout.primary.auto)
         .navigationBarHidden(true)
+        .overlay(alignment: .topTrailing) {
+            Button {
+                isProfilePresented = true
+            } label: {
+                Image(systemName: "person.circle.fill")
+                    .font(.title2)
+                    .foregroundStyle(ColorLayout.white.auto)
+                    .padding(12)
+                    .background(.ultraThinMaterial, in: Circle())
+            }
+            .accessibilityLabel("Apri profilo utente")
+            .padding(.top, 12)
+            .padding(.trailing, 20)
+        }
+        .sheet(isPresented: $isProfilePresented) {
+            ProfileView()
+                .environmentObject(authStore)
+        }
         .onAppear {
             // Fetch only once
             if !searchManager.isDataLoaded {
@@ -153,8 +173,8 @@ struct HomeView: View {
 //}
 
 // MARK: - HERO MARK
-private struct HomeHeroMarkView: View {
-    var body: some View {
+public struct HomeHeroMarkView: View {
+    public var body: some View {
         ZStack {
             Circle()
                 .fill(

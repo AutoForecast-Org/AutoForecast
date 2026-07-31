@@ -33,7 +33,9 @@ struct RootView: View {
 
     @ViewBuilder
     private var mainContent: some View {
-        if welcomeScreenAlreadyShown {
+        if !welcomeScreenAlreadyShown {
+            WelcomeGalleryView(slides: slides)
+        } else {
             NavigationStack(path: $routeViewModel.navPath) {
                 MainTabView()
                     .navigationDestination(for: Route.self) { route in
@@ -42,8 +44,6 @@ struct RootView: View {
             }
             .environment(\.navigate, routeViewModel)
             .environmentObject(searchManager)
-        } else {
-            WelcomeGalleryView(slides: slides)
         }
     }
 }

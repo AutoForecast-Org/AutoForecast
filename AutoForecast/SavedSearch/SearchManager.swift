@@ -37,11 +37,8 @@ class SearchManager: ObservableObject {
 
     private let client: SupabaseClient
 
-    init() {
-        self.client = SupabaseClient(
-            supabaseURL: URL(string: "https://mxfghxnyhrxsorxjztpz.supabase.co")!,
-            supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im14ZmdoeG55aHJ4c29yeGp6dHB6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzOTczNDIsImV4cCI6MjA5ODk3MzM0Mn0.Xj5dURaQdObe5IwW2fRCF8bP0mJRGAhpqxG2VAFucyA"
-        )
+    init(client: SupabaseClient = SupabaseClientProvider.client) {
+        self.client = client
         load()
     }
     

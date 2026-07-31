@@ -15,6 +15,7 @@ import SwiftUI
 struct AutoForecastApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @AppStorage("appLanguage") private var appLanguage: String = "it"
+    @StateObject private var authStore = AuthStore()
     
     var body: some Scene {
 //        WindowGroup {
@@ -33,6 +34,7 @@ struct AutoForecastApp: App {
         } rootContent: {
             RootView()
                 .environment(\.locale, .init(identifier: appLanguage))
+                .environmentObject(authStore)
         }
     }
     

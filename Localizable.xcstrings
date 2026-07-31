@@ -135,6 +135,15 @@
         }
       }
     },
+    "Accedi con il tuo Apple Account per sbloccare tutte le funzionalità di AutoForecast e stimare il valore futuro della tua auto, oppure guarda il report d'esempio nel Garage." : {
+
+    },
+    "Accesso in corso…" : {
+
+    },
+    "Account" : {
+
+    },
     "Aggiorna il confronto al valore stimato dopo %lld anni." : {
 
     },
@@ -301,10 +310,16 @@
         }
       }
     },
+    "Apre l'autenticazione con %@" : {
+
+    },
     "Apri confronto" : {
 
     },
     "Apri il confronto dettagliato" : {
+
+    },
+    "Apri profilo utente" : {
 
     },
     "Apri un esempio" : {
@@ -391,6 +406,9 @@
           }
         }
       }
+    },
+    "Benvenuto" : {
+
     },
     "Brand" : {
       "localizations" : {
@@ -597,6 +615,21 @@
         }
       }
     },
+    "Elimina account" : {
+
+    },
+    "Elimina definitivamente" : {
+
+    },
+    "Eliminare definitivamente l'account?" : {
+
+    },
+    "Eliminazione account…" : {
+
+    },
+    "Email" : {
+
+    },
     "English" : {
       "localizations" : {
         "en" : {
@@ -606,6 +639,9 @@
           }
         }
       }
+    },
+    "Esci" : {
+
     },
     "Espansa" : {
 
@@ -650,6 +686,9 @@
         }
       }
     },
+    "Fine" : {
+
+    },
     "Garage" : {
       "localizations" : {
         "en" : {
@@ -679,6 +718,9 @@
           }
         }
       }
+    },
+    "Grazie alla funzione 'Nascondi la mia email' di Apple, puoi accedere in modo totalmente anonimo senza condividere il tuo indirizzo con noi." : {
+
     },
     "Guarda un esempio →" : {
       "extractionState" : "stale",
@@ -720,6 +762,9 @@
           }
         }
       }
+    },
+    "ID utente" : {
+
     },
     "Identifica la tua auto" : {
       "localizations" : {
@@ -886,6 +931,9 @@
           }
         }
       }
+    },
+    "L'eliminazione rimuove definitivamente l'account e i dati associati dal server. Questa operazione non può essere annullata." : {
+
     },
     "La presenza di optional rilevanti contribuisce alla tenuta del valore." : {
       "localizations" : {
@@ -1282,6 +1330,9 @@
         }
       }
     },
+    "Perderai definitivamente l'accesso e tutti i dati associati al tuo account." : {
+
+    },
     "Pop-up informativo" : {
       "localizations" : {
         "en" : {
@@ -1351,6 +1402,9 @@
           }
         }
       }
+    },
+    "Profilo" : {
+
     },
     "PROSEGUI" : {
       "localizations" : {
@@ -1827,6 +1881,9 @@
 
     },
     "Valori stimati alla stessa età del veicolo. I punti evidenziano l'anno selezionato." : {
+
+    },
+    "Verifica accesso…" : {
 
     },
     "Versione" : {
