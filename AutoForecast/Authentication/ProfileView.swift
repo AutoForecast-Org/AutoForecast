@@ -41,9 +41,28 @@ struct ProfileView: View {
                         showDeletionConfirmation = true
                     } label: {
                         Label("Elimina account", systemImage: "trash")
-                            .foregroundStyle(.red)
                     }
                     .disabled(isDeleting)
+                    .confirmationDialog(
+                        "Eliminare definitivamente l'account?",
+                        isPresented: $showDeletionConfirmation,
+                        titleVisibility: .visible
+                    ) {
+                        Button("Elimina definitivamente", role: .destructive) {
+                            Task {
+                                isDeleting = true
+                                let wasDeleted = await authStore.deleteAccount()
+                                isDeleting = false
+                                if wasDeleted {
+                                    dismiss()
+                                }
+                            }
+                        }
+
+                        Button("Annulla", role: .cancel) {}
+                    } message: {
+                        Text("Perderai definitivamente l'accesso e tutti i dati associati al tuo account.")
+                    }
                 } footer: {
                     Text("L'eliminazione rimuove definitivamente l'account e i dati associati dal server. Questa operazione non può essere annullata.")
                 }
@@ -61,23 +80,6 @@ struct ProfileView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Fine") { dismiss() }
                 }
-            }
-            .confirmationDialog(
-                "Eliminare definitivamente l'account?",
-                isPresented: $showDeletionConfirmation,
-                titleVisibility: .visible
-            ) {
-                Button("Elimina definitivamente", role: .destructive) {
-                    Task {
-                        isDeleting = true
-                        let wasDeleted = await authStore.deleteAccount()
-                        isDeleting = false
-                        if wasDeleted { dismiss() }
-                    }
-                }
-                Button("Annulla", role: .cancel) {}
-            } message: {
-                Text("Perderai definitivamente l'accesso e tutti i dati associati al tuo account.")
             }
             .overlay {
                 if isDeleting {
