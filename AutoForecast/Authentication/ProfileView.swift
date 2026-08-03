@@ -37,8 +37,11 @@ struct ProfileView: View {
                 }
 
                 Section {
-                    Button("Elimina account", systemImage: "trash", role: .destructive) {
+                    Button(role: .destructive) {
                         showDeletionConfirmation = true
+                    } label: {
+                        Label("Elimina account", systemImage: "trash")
+                            .foregroundStyle(.red)
                     }
                     .disabled(isDeleting)
                 } footer: {
