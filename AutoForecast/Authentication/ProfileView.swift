@@ -40,29 +40,14 @@ struct ProfileView: View {
                     Button(role: .destructive) {
                         showDeletionConfirmation = true
                     } label: {
-                        Label("Elimina account", systemImage: "trash")
+                        HStack {
+                            Image(systemName: "trash")
+                                .foregroundStyle(.red)
+                            
+                            Text("Elimina account")
+                        }
                     }
                     .disabled(isDeleting)
-                    .confirmationDialog(
-                        "Eliminare definitivamente l'account?",
-                        isPresented: $showDeletionConfirmation,
-                        titleVisibility: .visible
-                    ) {
-                        Button("Elimina definitivamente", role: .destructive) {
-                            Task {
-                                isDeleting = true
-                                let wasDeleted = await authStore.deleteAccount()
-                                isDeleting = false
-                                if wasDeleted {
-                                    dismiss()
-                                }
-                            }
-                        }
-
-                        Button("Annulla", role: .cancel) {}
-                    } message: {
-                        Text("Perderai definitivamente l'accesso e tutti i dati associati al tuo account.")
-                    }
                 } footer: {
                     Text("L'eliminazione rimuove definitivamente l'account e i dati associati dal server. Questa operazione non può essere annullata.")
                 }
@@ -82,11 +67,68 @@ struct ProfileView: View {
                 }
             }
             .overlay {
-                if isDeleting {
-                    ProgressView("Eliminazione account…")
-                        .padding(20)
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                ZStack {
+                    if showDeletionConfirmation {
+                        Color.black.opacity(0.35)
+                            .ignoresSafeArea()
+                            .onTapGesture {
+                                showDeletionConfirmation = false
+                            }
+
+                        VStack(spacing: 20) {
+
+                            Text("Eliminare definitivamente l'account?")
+                                .font(.headline)
+
+                            Text("Perderai definitivamente l'accesso e tutti i dati associati al tuo account. Questa operazione non può essere annullata.")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+
+                            HStack {
+                                Button("Annulla") {
+                                    showDeletionConfirmation = false
+                                }
+
+                                Spacer()
+
+                                Button("Elimina", role: .destructive) {
+                                    showDeletionConfirmation = false
+
+                                    Task {
+                                        isDeleting = true
+                                        let wasDeleted = await authStore.deleteAccount()
+                                        isDeleting = false
+
+                                        if wasDeleted {
+                                            dismiss()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .padding(24)
+                        .frame(maxWidth: 340)
+                        .background(.regularMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                        .shadow(radius: 20)
+                        .padding()
+                    }
+
+                    if isDeleting {
+                        Color.black.opacity(0.35)
+                            .ignoresSafeArea()
+
+                        ProgressView("Eliminazione account…")
+                            .padding(20)
+                            .background(
+                                .regularMaterial,
+                                in: RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            )
+                    }
                 }
+                .animation(.easeInOut(duration: 0.2), value: showDeletionConfirmation)
+                .animation(.easeInOut(duration: 0.2), value: isDeleting)
             }
         }
     }

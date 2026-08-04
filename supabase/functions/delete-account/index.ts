@@ -43,7 +43,8 @@ Deno.serve(async (request) => {
   // Add explicit cleanup here for data not protected by ON DELETE CASCADE (for example Storage objects).
   // Tables with a user_id foreign key should reference auth.users(id) ON DELETE CASCADE.
   const adminClient = createClient(projectURL, serviceRoleKey);
-  const { error: deleteError } = await adminClient.auth.admin.deleteUser(user.id, true);
+  // const { error: deleteError } = await adminClient.auth.admin.deleteUser(user.id, true);
+  const { error: deleteError } = await adminClient.auth.admin.deleteUser(user.id);
 
   if (deleteError) {
     console.error("Unable to delete account", deleteError);

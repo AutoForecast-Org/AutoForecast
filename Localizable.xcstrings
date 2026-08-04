@@ -615,10 +615,10 @@
         }
       }
     },
-    "Elimina account" : {
+    "Elimina" : {
 
     },
-    "Elimina definitivamente" : {
+    "Elimina account" : {
 
     },
     "Eliminare definitivamente l'account?" : {
@@ -1330,7 +1330,7 @@
         }
       }
     },
-    "Perderai definitivamente l'accesso e tutti i dati associati al tuo account." : {
+    "Perderai definitivamente l'accesso e tutti i dati associati al tuo account. Questa operazione non può essere annullata." : {
 
     },
     "Pop-up informativo" : {
