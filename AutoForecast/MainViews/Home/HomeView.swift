@@ -37,7 +37,7 @@ struct HomeView: View {
                         
                         Spacer(minLength: 16)
                         
-                        Text("Prevedi il valore futuro della tua auto")
+                        Text("Prevedi il valore futuro della tua auto ")
 //                        Text("Prevedi il valore futuro dell'auto")
                             .font(.largeTitle.weight(.bold))
                             .fontWeight(.bold)
