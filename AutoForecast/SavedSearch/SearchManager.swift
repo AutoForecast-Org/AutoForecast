@@ -154,7 +154,8 @@ extension SearchManager {
             async let optionals = fetchTable("CoefficientOptional", as: CoefficientOptional.self)
 
             // Await ALL AT ONCE, in parallel
-            self.carsDataset = try await cars
+            let loadedCars = try await cars
+            self.carsDataset = loadedCars
             self.coefficientCarCategories = try await categories
             self.coefficientColors = try await colors
             self.coefficientDepreciationOverYears = try await depreciation
@@ -164,6 +165,10 @@ extension SearchManager {
             self.coefficientNumberOfOwners = try await owners
             self.coefficientOptionals = try await optionals
             
+            print("CarValues loaded: \(loadedCars.count) rows")
+            if loadedCars.isEmpty {
+                print("⚠️ CarValues is empty: there are no cars to show in the UI")
+            }
             print("ALL coefficient tables fetched successfully")
 
             self.isDataLoaded = true
