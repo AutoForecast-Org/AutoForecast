@@ -18,7 +18,8 @@ enum Route: Hashable {
     case parametersView
     case optionalParameters(UserCar)
     case summaryView(UserCar)
-    case forecastScreen(UserCar)
+//    case forecastScreen(UserCar)
+    case forecastScreen(UserCarForecast)
 }
 
 // MARK: - Route view definition, set them here
@@ -34,8 +35,10 @@ struct Routes: View {
             OptionalParametersView(userCar: userCar)
         case .summaryView(let userCar):
             SummaryCarInfoView(userCar: userCar)
-        case .forecastScreen(let userCar):
-            ForecastScreen(userCar: userCar)
+//        case .forecastScreen(let userCar):
+//            ForecastScreen(userCar: userCar)
+        case .forecastScreen(let userCarForecast):
+            ForecastScreen(userCarForecast: userCarForecast)
         }
     }
 }

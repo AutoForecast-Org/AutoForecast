@@ -14,11 +14,15 @@ import SwiftUI
 struct SummaryCarInfoView: View {
 
     @Environment(\.navigate) private var navigate
+    @EnvironmentObject private var searchManager: SearchManager
 
     @State private var showProgressOverlay = false
-    @State private var progressMessage = "1/2 Recupero le informazioni"
+//    @State private var progressMessage = "1/2 Recupero le informazioni"
+    @State private var showAIErrorAlert = false
+    @State private var aiErrorMessage = ""
     
     let userCar: UserCar
+    private let aiForecastService = AIForecastService()
 
     var body: some View {
         ZStack {
@@ -41,18 +45,21 @@ struct SummaryCarInfoView: View {
                 }
 
                 Button("CALCOLA") {
-                    showProgressOverlay = true
-                    progressMessage = "1/2 Recupero le informazioni"
-
-                    // Step 1 → Change message after 2.5 seconds
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                        progressMessage = "2/2 Elaborazione..."
-                    }
-
-                    // Step 2 → Go to the screen after 5 seconds
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        showProgressOverlay = false
-                        navigate.append(.forecastScreen(userCar))
+//                    showProgressOverlay = true
+//                    progressMessage = "1/2 Recupero le informazioni"
+//
+//                    // Step 1 → Change message after 2.5 seconds
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+//                        progressMessage = "2/2 Elaborazione..."
+//                    }
+//
+//                    // Step 2 → Go to the screen after 5 seconds
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//                        showProgressOverlay = false
+//                        navigate.append(.forecastScreen(userCar))
+//                    }
+                    Task {
+                        await generateForecast()
                     }
                 }
                 .font(.headline)
@@ -75,6 +82,32 @@ struct SummaryCarInfoView: View {
         }
         .navigationTitle("Riepilogo")
         .navigationBarTitleDisplayMode(.inline)
+        .alert("Errore calcolo AI", isPresented: $showAIErrorAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(aiErrorMessage)
+        }
+    }
+
+    @MainActor
+    private func generateForecast() async {
+        guard !showProgressOverlay else { return }
+
+        showProgressOverlay = true
+
+        do {
+            let forecast = try await aiForecastService.generateForecast(
+                for: userCar,
+                searchManager: searchManager
+            )
+
+            showProgressOverlay = false
+            navigate.append(.forecastScreen(forecast))
+        } catch {
+            showProgressOverlay = false
+            aiErrorMessage = error.localizedDescription
+            showAIErrorAlert = true
+        }
     }
 
     // Reusable row builder

@@ -11,7 +11,7 @@
 
 import Foundation
 
-public struct DepreciationPoint: Identifiable, Codable, Equatable {
+public struct DepreciationPoint: Identifiable, Codable, Equatable, Hashable {
     public let id: UUID
     public let year: Int
     public let value: Double
@@ -20,6 +20,19 @@ public struct DepreciationPoint: Identifiable, Codable, Equatable {
         self.id = id
         self.year = year
         self.value = value
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case year
+        case value
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
+        year = try container.decode(Int.self, forKey: .year)
+        value = try container.decode(Double.self, forKey: .value)
     }
 }
 

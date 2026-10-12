@@ -13,28 +13,28 @@ import SwiftUI
 
 struct ForecastScreen: View {
 
-    var userCar: UserCar
-
-    @EnvironmentObject var searchManager: SearchManager
-
-    private var depreciationEngine: DepreciationEngine {
-        DepreciationEngine(searchManager: searchManager)
-    }
+//    var userCar: UserCar
+//
+//    @EnvironmentObject var searchManager: SearchManager
+//
+//    private var depreciationEngine: DepreciationEngine {
+//        DepreciationEngine(searchManager: searchManager)
+//    }
+    let userCarForecast: UserCarForecast
 
     var body: some View {
-        let basePrice = depreciationEngine.resolvePurchasePrice(userCar: userCar)
-
         VStack(spacing: 20) {
             ForecastView(
-                userCarForecast: UserCarForecast(
-                    userCar: userCar,
-                    data: depreciationEngine.generateDepreciationData(userCar: userCar, basePrice: basePrice),
-                    optimisticData: depreciationEngine.generateOptimisticData(userCar: userCar, basePrice: basePrice),
-                    pessimisticData: depreciationEngine.generatePessimisticData(userCar: userCar, basePrice: basePrice),
-                    purchasePrice: basePrice,
-                    isExmample: false,
-                    isSaved: false
-                )
+//                userCarForecast: UserCarForecast(
+//                    userCar: userCar,
+//                    data: depreciationEngine.generateDepreciationData(userCar: userCar, basePrice: basePrice),
+//                    optimisticData: depreciationEngine.generateOptimisticData(userCar: userCar, basePrice: basePrice),
+//                    pessimisticData: depreciationEngine.generatePessimisticData(userCar: userCar, basePrice: basePrice),
+//                    purchasePrice: basePrice,
+//                    isExmample: false,
+//                    isSaved: false
+//                )
+                userCarForecast: userCarForecast
             )
         }
         .navigationTitle("Previsione")

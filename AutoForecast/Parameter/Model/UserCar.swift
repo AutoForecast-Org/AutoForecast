@@ -11,7 +11,7 @@
 
 import Foundation
 
-struct UserCar: Hashable{
+struct UserCar: Hashable, Codable {
     var brand: String
     var model: String
     var engine: String
@@ -26,7 +26,7 @@ struct UserCar: Hashable{
     var numberOfOwners: Int?
 }
 
-struct UserCarForecast {
+struct UserCarForecast: Hashable, Codable {
     var userCar: UserCar
     // OTHER DATA
     var data: [DepreciationPoint]
