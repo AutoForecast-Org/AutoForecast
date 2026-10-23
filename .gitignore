@@ -94,3 +94,5 @@ iOSInjectionProject/
 .DS_Store
 *.xcworkspace
 Brewfile.lock.json
+
+Config.xcconfig
