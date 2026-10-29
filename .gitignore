@@ -96,3 +96,9 @@ iOSInjectionProject/
 Brewfile.lock.json
 
 Config.xcconfig
+
+# Supabase runtime secrets and local CLI state
+supabase/functions/.env
+supabase/functions/.env.*
+supabase/**/.temp/
+supabase/**/.branches/

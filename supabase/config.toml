@@ -1,0 +1,4 @@
+project_id = "AutoForecast"
+
+[functions.generate-forecast]
+verify_jwt = true
