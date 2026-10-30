@@ -111,7 +111,7 @@ struct SummaryCarInfoView: View {
     }
 
     // Reusable row builder
-    func infoRow(label: LocalizedStringResource, value: String) -> some View {
+    func infoRow(label: LocalizedStringKey, value: String) -> some View {
         HStack {
             Text(label)
             Spacer()
@@ -122,7 +122,7 @@ struct SummaryCarInfoView: View {
 }
 
 struct AnimatedProgressOverlay: View {
-    let messages: [LocalizedStringResource]
+    let messages: [LocalizedStringKey]
     @State private var currentIndex = 0
     @State private var showCard = false
     @State private var breathe = false

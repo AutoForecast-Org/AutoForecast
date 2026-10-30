@@ -68,13 +68,13 @@ enum AIForecastError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .authenticationRequired:
-            return "Accedi nuovamente per generare una previsione."
+            return AppLocalization.string("Accedi nuovamente per generare una previsione.")
         case .quotaExceeded:
-            return "Hai raggiunto il limite di previsioni disponibili. Riprova più tardi."
+            return AppLocalization.string("Hai raggiunto il limite di previsioni disponibili. Riprova più tardi.")
         case .serviceUnavailable(let statusCode):
-            return "Il servizio di previsione è temporaneamente indisponibile (HTTP \(statusCode)). Riprova tra poco."
+            return AppLocalization.string("Il servizio di previsione è temporaneamente indisponibile (HTTP \(String(statusCode))). Riprova tra poco.")
         case .invalidResponse(let message):
-            return "La risposta dell'AI non è valida: \(message)"
+            return AppLocalization.string("La risposta dell'AI non è valida: \(message)")
         case .requestFailed(let message):
             return message
         }
@@ -100,14 +100,14 @@ final class AIForecastService {
               !userCar.brand.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
               !userCar.model.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
               !userCar.engine.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            throw AIForecastError.requestFailed("Parametri della previsione non validi.")
+            throw AIForecastError.requestFailed(AppLocalization.string("Parametri della previsione non validi."))
         }
         let engine = DepreciationEngine(searchManager: searchManager)
         let referencePrice = engine.resolvePurchasePrice(userCar: userCar)
         let policy = try ForecastScenarioAdjustment(userCar: userCar, searchManager: searchManager)
         guard referencePrice.isFinite, referencePrice > 0,
               policy.optimisticMultiplier.isFinite, policy.pessimisticMultiplier.isFinite else {
-            throw AIForecastError.requestFailed("Prezzo o coefficienti della previsione non validi.")
+            throw AIForecastError.requestFailed(AppLocalization.string("Prezzo o coefficienti della previsione non validi."))
         }
         let age = currentYear - userCar.registrationYear
         let fuel = engine.resolveCar(userCar: userCar).first.flatMap { car in
@@ -129,12 +129,12 @@ enum ForecastOutputValidator {
         let expectedYears = Array(input.startYear...input.startYear + input.analysisYears)
         guard output.data.map(\.year) == expectedYears,
               output.data.allSatisfy({ $0.value.isFinite && $0.value >= 0 }) else {
-            throw AIForecastError.invalidResponse("Serie base incompleta, non ordinata o con valori non validi.")
+            throw AIForecastError.invalidResponse(AppLocalization.string("Serie base incompleta, non ordinata o con valori non validi."))
         }
         let optimistic = adjustment.optimisticSeries(from: output.data)
         let pessimistic = adjustment.pessimisticSeries(from: output.data)
         guard (optimistic + pessimistic).allSatisfy({ $0.value.isFinite && $0.value >= 0 }) else {
-            throw AIForecastError.invalidResponse("Coefficienti degli scenari non validi.")
+            throw AIForecastError.invalidResponse(AppLocalization.string("Coefficienti degli scenari non validi."))
         }
         return UserCarForecast(
             userCar: userCar, data: output.data, optimisticData: optimistic,
@@ -157,11 +157,11 @@ enum ForecastBackendError {
         case 429 where code == "quota_exceeded":
             return .quotaExceeded
         case 400, 413:
-            return .requestFailed("I dati della previsione non sono validi.")
+            return .requestFailed(AppLocalization.string("I dati della previsione non sono validi."))
         case 404:
-            return .requestFailed("Il servizio di previsione non è ancora configurato.")
+            return .requestFailed(AppLocalization.string("Il servizio di previsione non è ancora configurato."))
         case 422:
-            return .invalidResponse("Il servizio non ha potuto generare una curva valida.")
+            return .invalidResponse(AppLocalization.string("Il servizio non ha potuto generare una curva valida."))
         default:
             return .serviceUnavailable(statusCode: statusCode)
         }

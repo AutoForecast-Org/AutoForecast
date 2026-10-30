@@ -76,7 +76,7 @@ struct AuthView: View {
 }
 
 private struct SocialSignInButton: View {
-    let title: String
+    let title: LocalizedStringKey
     let icon: String
     let action: () async -> Void
 
@@ -97,6 +97,6 @@ private struct SocialSignInButton: View {
                         .stroke(Color.primary.opacity(0.12), lineWidth: 1)
                 }
         }
-        .accessibilityHint("Apre l'autenticazione con \(title.replacingOccurrences(of: "Continua con ", with: ""))")
+        .accessibilityHint("Apre l’autenticazione con Apple")
     }
 }

@@ -60,7 +60,7 @@ final class AuthStore: ObservableObject {
         } catch let error as ASAuthorizationError where error.code == .canceled {
             // The user deliberately dismissed the native Apple authorization sheet.
         } catch {
-            errorMessage = "Non è stato possibile completare l'accesso con Apple. Riprova."
+            errorMessage = AppLocalization.string("Non è stato possibile completare l'accesso con Apple. Riprova.")
         }
     }
 
@@ -70,7 +70,7 @@ final class AuthStore: ObservableObject {
         do {
             try await client.auth.signOut()
         } catch {
-            errorMessage = "Non è stato possibile uscire dall'account. Riprova."
+            errorMessage = AppLocalization.string("Non è stato possibile uscire dall'account. Riprova.")
         }
     }
 
@@ -86,7 +86,7 @@ final class AuthStore: ObservableObject {
             session = nil
             return true
         } catch {
-            errorMessage = "Non è stato possibile eliminare l'account. Riprova più tardi."
+            errorMessage = AppLocalization.string("Non è stato possibile eliminare l'account. Riprova più tardi.")
             return false
         }
     }

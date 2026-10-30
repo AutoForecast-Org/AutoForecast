@@ -12,7 +12,7 @@
 import SwiftUI
 
 struct ToggleButton: View {
-    let title: LocalizedStringResource
+    let title: LocalizedStringKey
     @Binding var isOn: Bool
     let color: Color
 

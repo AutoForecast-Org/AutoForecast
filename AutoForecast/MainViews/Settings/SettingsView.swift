@@ -16,7 +16,6 @@ struct SettingsView: View {
     @AppStorage("appTheme") private var appTheme: ThemeOption = .system
     @AppStorage("appLanguage") private var appLanguage: String = "it"
     
-    @State private var showEnglishComingSoon = false
     
     var body: some View {
         VStack {
@@ -45,11 +44,7 @@ struct SettingsView: View {
                         Text("Italiano").tag("it")
                         Text("English").tag("en")
                     }
-                    .onChange(of: appLanguage) { oldValue, newValue in
-                        if newValue == "en" {
-                            showEnglishComingSoon = true
-                        }
-                    }
+
                 }
 
                 // MARK: - Supporto
@@ -87,11 +82,7 @@ struct SettingsView: View {
         }
         .background(ColorLayout.appBackround.auto)
         .preferredColorScheme(appTheme.colorScheme)
-        .alert("Language Notice", isPresented: $showEnglishComingSoon) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("The English translation is currently work in progress and may contain minor errors. We are actively working to improve it.")
-        }
+
     }
 }
 

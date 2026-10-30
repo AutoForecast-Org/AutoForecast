@@ -53,7 +53,7 @@ let slides = [
         description: "Confronta auto simili per capire quale svaluta meno nel tempo e salva le ricerche importanti nel tuo Garage personale.",
         highlights: [
             "Confronto diretto tra modelli simili",
-            "Percentuale di svalutazion",
+            "Percentuale di svalutazione",
             "Recupero rapido delle ricerche salvate"
         ],
         footerNote: "Puoi sempre modificare i parametri e rigenerare la previsione."

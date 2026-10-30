@@ -16,8 +16,8 @@ struct FAQView: View {
     // MARK: - Domande e risposte
     struct FAQItem: Identifiable {
         let id = UUID()
-        let question: LocalizedStringResource
-        let answer: LocalizedStringResource
+        let question: LocalizedStringKey
+        let answer: LocalizedStringKey
     }
     
     let faqItems: [FAQItem] = [

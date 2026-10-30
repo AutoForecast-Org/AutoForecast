@@ -12,10 +12,10 @@
 import SwiftUI
 
 struct SectionTitle: View {
-    let text: String
+    let text: LocalizedStringKey
     let systemImage: String?
 
-    init(_ text: String, systemImage: String? = nil) {
+    init(_ text: LocalizedStringKey, systemImage: String? = nil) {
         self.text = text
         self.systemImage = systemImage
     }

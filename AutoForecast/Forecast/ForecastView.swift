@@ -51,7 +51,7 @@ struct ForecastView: View {
     private var vehicleListPrice: String {
         let price = Int(userCarForecast.purchasePrice.rounded())
             .formatted(.currency(code: "EUR").precision(.fractionLength(0)))
-        return String(localized: "Prezzo di listino: \(price)")
+        return AppLocalization.string("Prezzo di listino: \(price)")
     }
 
     private var versionAndEngine: String {
@@ -63,7 +63,7 @@ struct ForecastView: View {
     }
 
     private var yearAndKms: String {
-        String(localized: "Anno: \(userCarForecast.userCar.registrationYear, format: .number.grouping(.never)) • Km: \(userCarForecast.userCar.actualKm, format: .number.grouping(.automatic)) km")
+        AppLocalization.string("Anno: \(userCarForecast.userCar.registrationYear, format: .number.grouping(.never)) • Km: \(userCarForecast.userCar.actualKm, format: .number.grouping(.automatic)) km")
     }
 
     private var yearRange: ClosedRange<Double> {
@@ -336,7 +336,7 @@ struct ForecastView: View {
                     )
 
                     forecastHeroRow(
-                        title: "Valore anno \(selectedYear)",
+                        title: "Valore anno \(String(selectedYear))",
                         value: selectedForecastValueText,
                         systemImage: "calendar.badge.clock"
                     )
@@ -355,7 +355,7 @@ struct ForecastView: View {
     }
 
     private func forecastHeroRow(
-        title: String,
+        title: LocalizedStringKey,
         value: String,
         systemImage: String,
         valueColor: Color = .primary
@@ -882,7 +882,7 @@ struct ForecastView: View {
             } label: {
                 HStack {
                     Spacer()
-                    Text(showAllInfoCards ? "Mostra meno" : "Scopri di più")
+                    Text(showAllInfoCards ? LocalizedStringKey("Mostra meno") : LocalizedStringKey("Scopri di più"))
                         .font(.subheadline)
                         .fontWeight(.medium)
 

@@ -122,6 +122,6 @@ private enum AppleSignInError: LocalizedError {
     case missingIdentityToken
 
     var errorDescription: String? {
-        "Apple non ha restituito un token di accesso valido. Riprova."
+        AppLocalization.string("Apple non ha restituito un token di accesso valido. Riprova.")
     }
 }

@@ -52,7 +52,7 @@ struct WelcomeGalleryView: View {
                     welcomeScreenAlreadyShown = true
                 }
             }) {
-                Text(isLastSlide ? "Inizia" : "Avanti")
+                Text(isLastSlide ? LocalizedStringKey("Inizia") : LocalizedStringKey("Avanti"))
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(ColorLayout.primary.auto)

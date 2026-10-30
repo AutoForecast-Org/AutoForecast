@@ -25,23 +25,23 @@ enum SupabaseForecastClient {
             do {
                 return try JSONDecoder().decode(AIForecastOutput.self, from: data)
             } catch {
-                throw AIForecastError.invalidResponse("Formato della risposta server non riconosciuto.")
+                throw AIForecastError.invalidResponse(AppLocalization.string("Formato della risposta server non riconosciuto."))
             }
         } catch let error as FunctionsError {
             switch error {
             case .httpError(let code, let data):
                 throw ForecastBackendError.map(statusCode: code, data: data)
             case .relayError:
-                throw AIForecastError.requestFailed("Impossibile raggiungere il servizio di previsione.")
+                throw AIForecastError.requestFailed(AppLocalization.string("Impossibile raggiungere il servizio di previsione."))
             }
         } catch let error as URLError {
             switch error.code {
             case .notConnectedToInternet:
-                throw AIForecastError.requestFailed("Nessuna connessione a Internet.")
+                throw AIForecastError.requestFailed(AppLocalization.string("Nessuna connessione a Internet."))
             case .timedOut:
-                throw AIForecastError.requestFailed("La previsione ha impiegato troppo tempo. Riprova più tardi.")
+                throw AIForecastError.requestFailed(AppLocalization.string("La previsione ha impiegato troppo tempo. Riprova più tardi."))
             default:
-                throw AIForecastError.requestFailed("Connessione al servizio di previsione interrotta.")
+                throw AIForecastError.requestFailed(AppLocalization.string("Connessione al servizio di previsione interrotta."))
             }
         }
         // No automatic POST retry: a lost response may already have incurred inference cost.

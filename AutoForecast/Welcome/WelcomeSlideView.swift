@@ -38,18 +38,18 @@ struct WelcomeSlideView: View {
                 .frame(height: 220)
                 .cornerRadius(16)
 
-            Text(slide.title)
+            Text(LocalizedStringKey(slide.title))
                 .font(.title2)
                 .fontWeight(.bold)
 
-            Text(slide.description)
+            Text(LocalizedStringKey(slide.description))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
             VStack(alignment: .leading, spacing: 10) {
                 ForEach(slide.highlights, id: \.self) { highlight in
-                    Label(highlight, systemImage: "checkmark.circle.fill")
+                    Label(LocalizedStringKey(highlight), systemImage: "checkmark.circle.fill")
                         .font(.subheadline)
                         .foregroundStyle(.primary)
                         .labelStyle(.titleAndIcon)
@@ -57,7 +57,7 @@ struct WelcomeSlideView: View {
             }
 
             if let footerNote = slide.footerNote {
-                Text(footerNote)
+                Text(LocalizedStringKey(footerNote))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

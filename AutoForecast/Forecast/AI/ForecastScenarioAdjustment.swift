@@ -20,7 +20,13 @@ struct ForecastScenarioAdjustment {
         func append(_ parameter: String, isMissing: Bool, coefficients: [Float]) throws {
             guard isMissing else { return }
             guard coefficients.allSatisfy({ $0.isFinite && $0 > 0 }) else {
-                throw AIForecastError.requestFailed("Coefficienti remoti non validi per \(parameter).")
+                let labels: [String: String.LocalizationValue] = [
+                    "color": "Colore", "zone": "Zona geografica",
+                    "certifiedMaintenance": "Manutenzione",
+                    "numberOfOwners": "Numero di proprietari", "optionals": "Optionals"
+                ]
+                let label = AppLocalization.string(labels[parameter] ?? "Parametri opzionali")
+                throw AIForecastError.requestFailed(AppLocalization.string("Coefficienti remoti non validi per \(label)."))
             }
             // 1 is the existing neutral fallback. Empty tables leave the curve unchanged.
             // The neutral base is included so a missing factor cannot invert the scenarios.
@@ -45,7 +51,7 @@ struct ForecastScenarioAdjustment {
         factors = missing
         guard optimisticMultiplier.isFinite, pessimisticMultiplier.isFinite,
               pessimisticMultiplier > 0 else {
-            throw AIForecastError.requestFailed("Prodotto dei coefficienti remoti non valido.")
+            throw AIForecastError.requestFailed(AppLocalization.string("Prodotto dei coefficienti remoti non valido."))
         }
     }
 

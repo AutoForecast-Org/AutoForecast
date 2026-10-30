@@ -21,8 +21,8 @@ struct ProfileView: View {
         NavigationStack {
             List {
                 Section("Account") {
-                    LabeledContent("Email", value: authStore.user?.email ?? "Non disponibile")
-                    LabeledContent("ID utente", value: authStore.user?.id.uuidString ?? "Non disponibile")
+                    LabeledContent("Email", value: authStore.user?.email ?? AppLocalization.string("Non disponibile"))
+                    LabeledContent("ID utente", value: authStore.user?.id.uuidString ?? AppLocalization.string("Non disponibile"))
                         .lineLimit(1)
                         .truncationMode(.middle)
                 }

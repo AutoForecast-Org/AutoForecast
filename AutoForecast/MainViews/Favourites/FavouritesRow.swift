@@ -14,11 +14,6 @@ import SwiftUI
 struct FavouritesRow: View {
     let search: SavedSearch
 
-    private static let rowDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        return formatter
-    }()
 
     var body: some View {
         HStack(spacing: 16) {
@@ -76,6 +71,6 @@ struct FavouritesRow: View {
     }
     
     func formattedDate(_ date: Date) -> String {
-        Self.rowDateFormatter.string(from: date)
+        date.formatted(.dateTime.day().month(.abbreviated).year().locale(AppLocalization.locale))
     }
 }

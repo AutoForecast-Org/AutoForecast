@@ -31,12 +31,12 @@ struct ComparisonCandidateDetailSheet: View {
 
     private var candidateVersion: String {
         let raw = (rankedCandidate.candidate.car.version ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-        return raw.isEmpty ? "Versione non disponibile" : raw
+        return raw.isEmpty ? AppLocalization.string("Versione non disponibile") : raw
     }
 
     private var referenceVersionText: String {
         let raw = (referenceVersion ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-        return raw.isEmpty ? "Versione non disponibile" : raw
+        return raw.isEmpty ? AppLocalization.string("Versione non disponibile") : raw
     }
 
     private var candidateValueChange: Double {
@@ -245,8 +245,8 @@ struct ComparisonCandidateDetailSheet: View {
     }
 
     private func retentionSummaryContent(
-        title: String,
-        detail: String
+        title: LocalizedStringKey,
+        detail: LocalizedStringKey
     ) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("TENUTA DEL VALORE")
@@ -265,7 +265,7 @@ struct ComparisonCandidateDetailSheet: View {
     }
 
     private func vehicleColumn(
-        role: String,
+        role: LocalizedStringKey,
         title: String,
         version: String,
         fuel: String?,
@@ -301,10 +301,10 @@ struct ComparisonCandidateDetailSheet: View {
                 .foregroundColor(.secondary)
                 .lineLimit(2)
 
-            vehicleSpecification(icon: "fuelpump.fill", value: fuel, fallback: "Alimentazione N/D")
-            vehicleSpecification(icon: "gearshape.2.fill", value: engine, fallback: "Motore N/D")
+            vehicleSpecification(icon: "fuelpump.fill", value: fuel, fallback: AppLocalization.string("Alimentazione N/D"))
+            vehicleSpecification(icon: "gearshape.2.fill", value: engine, fallback: AppLocalization.string("Motore N/D"))
 
-            Text("\(registrationYear) → \(comparisonYear)")
+            Text("\(String(registrationYear)) → \(String(comparisonYear))")
                 .font(.caption2)
                 .foregroundColor(.secondary)
 
@@ -337,7 +337,7 @@ struct ComparisonCandidateDetailSheet: View {
             .lineLimit(2)
     }
 
-    private func compactMetric(title: String, value: String, valueColor: Color = .primary) -> some View {
+    private func compactMetric(title: LocalizedStringKey, value: String, valueColor: Color = .primary) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(title)
                 .font(.caption2)
@@ -351,7 +351,7 @@ struct ComparisonCandidateDetailSheet: View {
         }
     }
 
-    private func chartLegend(title: String, color: Color) -> some View {
+    private func chartLegend(title: LocalizedStringKey, color: Color) -> some View {
         HStack(spacing: 5) {
             Circle()
                 .fill(color)

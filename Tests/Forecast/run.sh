@@ -3,6 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")/../.."
 build_dir=$(mktemp -d /tmp/autoforecast-tests.XXXXXX)
 swiftc -module-cache-path "$build_dir/module-cache" -o "$build_dir/forecast-tests" \
+    AutoForecast/Utility/AppLocalization.swift \
     AutoForecast/Car/Car.swift \
     AutoForecast/Car/CoefficientModels.swift \
     AutoForecast/Parameter/Model/UserCar.swift \

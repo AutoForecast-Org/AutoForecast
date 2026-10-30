@@ -12,7 +12,7 @@
 import SwiftUI
 
 struct MetricBox: View {
-    let title: String
+    let title: LocalizedStringKey
     let value: String
     var tint: Color = .primary
 

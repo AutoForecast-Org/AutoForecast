@@ -132,7 +132,7 @@ struct CarValuePredictionCardView: View {
                     items: availableBrands,
                     showFeedbackLabel: true,
                     selectedItem: Binding(
-                        get: { selectedBrand ?? "Select Brand" },
+                        get: { selectedBrand ?? "Seleziona il brand" },
                         set: { newValue in
                             selectedBrand = newValue
                             selectedModel = nil
@@ -143,7 +143,7 @@ struct CarValuePredictionCardView: View {
                         }
                     )
                 )) {
-                    CardRow(title: "Brand", value: selectedBrand ?? String(localized: "Seleziona il brand"), icon: "car.side")
+                    CardRow(title: "Brand", value: selectedBrand ?? AppLocalization.string("Seleziona il brand"), icon: "car.side")
                 }
                 
                 // MARK: - Model
@@ -164,10 +164,10 @@ struct CarValuePredictionCardView: View {
                             }
                         )
                     )) {
-                        CardRow(title: "Modello", value: selectedModel ?? String(localized: "Seleziona il modello"), icon: "text.page.badge.magnifyingglass")
+                        CardRow(title: "Modello", value: selectedModel ?? AppLocalization.string("Seleziona il modello"), icon: "text.page.badge.magnifyingglass")
                     }
                 } else {
-                    CardRow(title: "Modello", value: String(localized: "Seleziona il modello"), icon: "text.page.badge.magnifyingglass", isEnabled: false)
+                    CardRow(title: "Modello", value: AppLocalization.string("Seleziona il modello"), icon: "text.page.badge.magnifyingglass", isEnabled: false)
                         .opacity(0.4)
                 }
                 
@@ -188,10 +188,10 @@ struct CarValuePredictionCardView: View {
                             }
                         )
                     )) {
-                        CardRow(title: "Motore", value: selectedEngine ?? String(localized: "Seleziona il motore"), icon: "engine.combustion")
+                        CardRow(title: "Motore", value: selectedEngine ?? AppLocalization.string("Seleziona il motore"), icon: "engine.combustion")
                     }
                 } else {
-                    CardRow(title: "Motore", value: String(localized: "Seleziona il motore"), icon: "engine.combustion", isEnabled: false)
+                    CardRow(title: "Motore", value: AppLocalization.string("Seleziona il motore"), icon: "engine.combustion", isEnabled: false)
                         .opacity(0.4)
                 }
                 
@@ -211,10 +211,10 @@ struct CarValuePredictionCardView: View {
                             }
                         )
                     )) {
-                        CardRow(title: "Anno di 1° immatricolazione", value: selectedYear ?? String(localized: "Seleziona l'anno"), icon: "calendar")
+                        CardRow(title: "Anno di 1° immatricolazione", value: selectedYear ?? AppLocalization.string("Seleziona l'anno"), icon: "calendar")
                     }
                 } else {
-                    CardRow(title: "Anno di 1° immatricolazione", value: String(localized: "Seleziona l'anno"), icon: "calendar", isEnabled: false)
+                    CardRow(title: "Anno di 1° immatricolazione", value: AppLocalization.string("Seleziona l'anno"), icon: "calendar", isEnabled: false)
                         .opacity(0.4)
                 }
                 
@@ -377,7 +377,7 @@ struct CarValuePredictionCardView: View {
 
 // MARK: - Reusable Card Row
 struct CardRow: View {
-    var title: LocalizedStringResource
+    var title: LocalizedStringKey
     var value: String
     var icon: String
     var isEnabled: Bool = true
@@ -410,7 +410,7 @@ struct CardRow: View {
 
 // MARK: - Searchable List View (search bar sempre visibile)
 struct SearchableSelectionListView: View {
-    let title: LocalizedStringResource
+    let title: LocalizedStringKey
     let items: [String]
     let showFeedbackLabel: Bool
     @Binding var selectedItem: String
@@ -455,15 +455,9 @@ struct SearchableSelectionListView: View {
                 NavigationLink {
                     FeedbackView()
                 } label: {
-                    if "\(title)".lowercased() == "Versione".lowercased() {
-                        Text("Non trovi la \(String(localized: title).lowercased()) che stavi cercando? Scrivici →")
-                            .font(.subheadline)
-                            .foregroundColor(ColorLayout.primary.auto)
-                    } else {
-                        Text("Non trovi il \(String(localized: title).lowercased()) che stavi cercando? Scrivici →")
-                            .font(.subheadline)
-                            .foregroundColor(ColorLayout.primary.auto)
-                    }
+                    Text("Non trovi quello che cerchi? Scrivici →")
+                        .font(.subheadline)
+                        .foregroundColor(ColorLayout.primary.auto)
                 }
                 .padding()
             }

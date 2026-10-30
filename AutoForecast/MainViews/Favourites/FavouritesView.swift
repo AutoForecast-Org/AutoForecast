@@ -66,7 +66,7 @@ struct FavouritesView: View {
                 .font(.title2)
                 .fontWeight(.bold)
 
-            Text(savedCount == 1 ? "1 auto salvata" : "\(savedCount) auto salvate")
+            Text("\(savedCount) auto salvate")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }

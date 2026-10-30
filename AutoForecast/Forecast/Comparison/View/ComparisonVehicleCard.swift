@@ -38,7 +38,7 @@ struct ComparisonVehicleCard: View {
 
     private var resolvedSubtitle: String {
         guard let subtitle, !subtitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            return "Versione non disponibile"
+            return AppLocalization.string("Versione non disponibile")
         }
         return subtitle
     }
@@ -63,8 +63,8 @@ struct ComparisonVehicleCard: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Auto di riferimento, \(title), \(resolvedSubtitle)")
-                    .accessibilityValue(isExpanded ? "Espansa" : "Compressa")
-                    .accessibilityHint(isExpanded ? "Doppio tocco per comprimere i dettagli" : "Doppio tocco per espandere i dettagli")
+                    .accessibilityValue(isExpanded ? Text("Espansa") : Text("Compressa"))
+                    .accessibilityHint(isExpanded ? Text("Doppio tocco per comprimere i dettagli") : Text("Doppio tocco per espandere i dettagli"))
                 } else {
                     vehicleHeader
                 }
@@ -130,13 +130,13 @@ struct ComparisonVehicleCard: View {
             }
 
             HStack(spacing: 8) {
-                DetailChip(label: fuel ?? "N/D", icon: "fuelpump.fill")
+                DetailChip(label: fuel ?? AppLocalization.string("N/D"), icon: "fuelpump.fill")
                 DetailChip(label: engine, icon: "gearshape.2.fill")
             }
 
             HStack(spacing: 8) {
                 DetailChip(label: "\(year)", icon: "calendar")
-                DetailChip(label: segment ?? "Segmento N/D", icon: "square.grid.2x2")
+                DetailChip(label: segment ?? AppLocalization.string("Segmento N/D"), icon: "square.grid.2x2")
             }
 
             HStack(spacing: 10) {

@@ -19,8 +19,8 @@ enum ComparisonBadge: String, Identifiable {
 
     var title: String {
         switch self {
-        case .convenient: return "Piu conveniente"
-        case .stable: return "Piu stabile"
+        case .convenient: return AppLocalization.string("Piu conveniente")
+        case .stable: return AppLocalization.string("Piu stabile")
         }
     }
 

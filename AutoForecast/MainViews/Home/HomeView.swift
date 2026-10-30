@@ -255,13 +255,13 @@ private struct HomeEvaluationButtonView: View {
 
                 VStack(alignment: .leading, spacing: 2) {
 //                    Text(isEnabled ? "Inizia la previsione" : "Caricamento dati...")
-                    Text(isEnabled ? "Inizia la previsione" : "Caricamento dati...")
+                    Text(isEnabled ? LocalizedStringKey("Inizia la previsione") : LocalizedStringKey("Caricamento dati..."))
                         .font(.headline.weight(.semibold))
                         .lineLimit(1)
 //                        .tracking(4)
 
 //                    Text(isEnabled ? "Personalizza il profilo della tua auto" : "Preparazione dei dati in corso")
-                    Text(isEnabled ? "Scopri la proiezione per la tua auto" : "Preparazione dei dati in corso")
+                    Text(isEnabled ? LocalizedStringKey("Scopri la proiezione per la tua auto") : LocalizedStringKey("Preparazione dei dati in corso"))
                         .font(.caption)
                         .foregroundColor(ColorLayout.white.auto.opacity(0.85))
                         .lineLimit(1)
